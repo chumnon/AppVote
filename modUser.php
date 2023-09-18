@@ -114,28 +114,20 @@ if (isset($_SESSION["connexion"])){
             <?php
         } else {
             $supprimer = "DELETE FROM utilisateur WHERE id = " . $leUser['id'];
-            if ($conn->query($supprimer) === TRUE) {
-                $envoye = "INSERT INTO utilisateur (user, mdp, id) VALUES ('" . $user . "', '" . $mdpCode . "' , '" .  $leUser['id'] . "');";
-                if ($conn->query($envoye) === TRUE) {
-                    ?>
-                        <div class="container-fluid" style="text-align:center">
-                            <h1>Utilisateur modifier</h1>
-                            <a href="profil.php?id=<?php echo $leUser['id']?>">profil</a> 
-                        </div>
-                    <?php
-                } else {
-                    ?>
-                    <h1><?php echo "Error: " . $envoye . "<br>" . $conn->error; ?></h1>
-                    <a href="index.php">Page principal</a>
-                    <?php
-                }
+            $update = "UPDATE utilisateur SET user = '" . $user . "', mdp = '" . $mdpCode ."' WHERE id = " . $leUser['id'];
+            if ($conn->query($update) === TRUE) {
+                ?>
+                <div class="container-fluid" style="text-align:center">
+                    <h1>Utilisateur modifier</h1>
+                    <a href="profil.php?id=<?php echo $leUser['id']?>">profil</a> 
+                    </div>
+                <?php
             } else {
                 ?>
-                <h1><?php echo "Error: " . $supprimer . "<br>" . $conn->error; ?></h1>
+                <h1><?php echo "Error: " . $update . "<br>" . $conn->error; ?></h1>
                 <a href="index.php">Page principal</a>
                 <?php
             }
-
         }
     }
 

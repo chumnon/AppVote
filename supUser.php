@@ -65,16 +65,23 @@ if (isset($_SESSION["connexion"])){
             </form>
             <?php
             } else {
+                $destroyDroit = "DELET FROM gestion WHERE user = " . $leUser['id'];
                 $destroy = "DELETE FROM utilisateur WHERE id = " . $leUser['id'];
-                if ($conn->query($destroy) === TRUE) {
-                    ?>
-                    <div class="container-fluid menu">
-                        <h1>Le compte a bien été supprimer</h1>
-                        <a href="connection.php">Page de connection</a>
-                    </div>
-                    <?php
-                } else {
-                    ?><h1><?php echo "Error: " . $destroy . "<br>" . $conn->error; ?></h1>
+                if ($conn->query($destroyDroit) === TRUE) {
+                    if ($conn->query($destroy) === TRUE) {
+                        ?>
+                        <div class="container-fluid menu">
+                            <h1>Le compte a bien été supprimer</h1>
+                            <a href="connection.php">Page de connection</a>
+                        </div>
+                        <?php
+                    } else {
+                        ?><h1><?php echo "Error: " . $destroy . "<br>" . $conn->error; ?></h1>
+                        <a class="optionBar" href="index.php">page principal</a>
+                        <?php
+                    }
+                else {
+                    ?><h1><?php echo "Error: " . $destroyDroit . "<br>" . $conn->error; ?></h1>
                     <a class="optionBar" href="index.php">page principal</a>
                     <?php
                 }
