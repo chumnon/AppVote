@@ -77,7 +77,7 @@ if (isset($_SESSION["connexion"])){
                 </div>
                 <div class="row modUser">
                     <div class="col-6 offset-md-2 col-md-3">
-                        <a href="modUser.php?id=<?php echo $leUser['id']?>">modifier le compte</a>
+                        <a href="modUser.php">modifier le compte</a>
                     </div>
                     <div class="col-6 offset-md-2 col-md-3">
                         <a href="supUser.php?id=<?php echo $leUser['id']?>">supprimer le compte</a>
