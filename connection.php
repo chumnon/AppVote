@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$_SESSION["connexion"] = false;
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +89,7 @@ session_start();
             <?php
         } else {
             $_SESSION["connexion"] = true;
-            echo "oui";
+            $_SESSION["user"] = $user;
             $url = "http://localhost/AppVote";
             header('Location:' . $url);
             Exit();

@@ -1,3 +1,16 @@
 .menu{
     text-align: center;
 }
+
+@media(min-width: 768px){
+    .monProfil{
+        text-align: left;
+    }
+    .changeUser{
+        text-align: right;
+    }
+}
+
+.retour{
+    text-align: right;
+}

@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION["connexion"])){
 } else {
-    $_SESSION["connexion"] = false
+    $_SESSION["connexion"] = false;
 };
 ?>
 
@@ -39,30 +39,43 @@ if (isset($_SESSION["connexion"])){
             }
 
             $conn->query('SET NAMES utf8');
-            $sql = "SELECT nom, id FROM evenement";
-            $result = $conn->query($sql);
+            $user = $_SESSION['user'];
+            $monUser = "SELECT user, id FROM utilisateur WHERE user LIKE '" . $user . "'";
+            $listeEvent = "SELECT nom, id FROM evenement WHERE id IN (SELECT evenement FROM gestion WHERE user IN (SELECT id FROM utilisateur WHERE user LIKE '" . $user . "'))";
+            $result = $conn->query($listeEvent);
+            $leUser = $conn->query($monUser)->fetch_assoc();
             ?>
+            
             <div class="container-fluid menu">
                 <div class="row optionCon">
-                    <div class="offset-md-8 col-6 col-md-2">
+                    <div class="col-4 col-md-2 monProfil">
+                        <a href="profil.php?id=<?php echo $leUser['id']?>">Mon profil</a>
+                    </div>
+                    <div class="offset-md-5 col-4 col-md-3 changeUser">
                         <a href="connection.php">Changer utilisateur</a>
                     </div>
-                    <div class="col-6 col-md-2">
+                    <div class="col-4 col-md-2">
                         <a href="newUser.php">Nouvel utilisateur</a>
                     </div>
                 </div>
                 <div class="row selectEvent">
                     <div class= "offset-md-2 col-md-8" >
                         <h2>Choix d'évènement</h2>
-                        <select class="choixEvent">
+                        <select class="choixEvent" id="listeEvent">
                             <?php
                             if ($result->num_rows > 0){
                                 while($row = $result->fetch_assoc()){
+                                    $noEvent = false;
+                                    if (isset($option1)){
+                                    } else {
+                                        $option1 = $row['id'];
+                                    };
                                     ?>
                                     <option value="<?php echo $row['id']?>"><?php echo $row['nom']?>
                                     <?php
                                 }
                             } else {
+                                $noEvent = true;
                                 ?>
                                 <option value="-1">Aucun évènement</option>
                                 <?php
@@ -71,9 +84,11 @@ if (isset($_SESSION["connexion"])){
                         <select>
                     </div>
                 </div>
+                <?php if ($noEvent != true){
+                ?>
                 <div class="row optionEvent ">
                     <div class="offset-md-1 col-md-4 col-6">
-                        <a class="modEvent" href="modEvent.php?id=<?php echo $row['id']?>">Modifier l'évènement</a>
+                        <a class="modEvent" href="modEvent.php?id=<?php echo $option1?>">Modifier l'évènement</a>
                     </div>
                     <div class="offset-md-2 col-md-4 col-6">
                         <a class="addEvent" href="newEvent.php">Ajouter un évènement</a>
@@ -81,19 +96,40 @@ if (isset($_SESSION["connexion"])){
                 </div>
                 <div class="row optionVote">
                     <div class="col-4">
-                        <a class="voteP" href="voteP.php?id=<?php echo $row['id']?>">Vote participant</a>
+                        <a class="voteP" href="voteP.php?id=<?php echo $option1?>">Vote participant</a>
                     </div>
                     <div class="col-4">
-                        <a class="voteO" href="voteO.php?id=<?php echo $row['id']?>">Vote organisateur</a>
+                        <a class="voteO" href="voteO.php?id=<?php echo $option1?>">Vote organisateur</a>
                     </div>
                     <div class="col-4">
-                        <a class="result" href="showVote.php?id=<?php echo $row['id']?>">Voir résultat</a>
+                        <a class="result" href="showVote.php?id=<?php echo $option1?>">Voir résultat</a>
                     </div>
                 </div>
+                <?php
+                }
+                ?>
             </div>
-        <?php        
+        <?php       
+    $conn->close(); 
     }
-    $conn->close();
     ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var listeEvent = $("#listeEvent");
+            listeEvent.val(listeEvent.find('option:first').val()); //Retour à la première valeur
+
+            listeEvent.on("change", function () {
+                var eventChoisi = $(this).val();// Récupérez la valeur sélectionnée
+                    
+                // Mettez à jour les liens avec la nouvelle valeur
+                $(".modEvent").attr("href", "modEvent.php?id=" + eventChoisi);
+                $(".voteP").attr("href", "voteP.php?id=" + eventChoisi);
+                $(".voteO").attr("href", "voteO.php?id=" + eventChoisi);
+                $(".result").attr("href", "showVote.php?id=" + eventChoisi);
+            });
+        });
+    </script>
+
 </body>
 </html>

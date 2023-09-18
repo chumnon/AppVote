@@ -12,7 +12,7 @@ if (isset($_SESSION["connexion"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nouvel utilisateur</title>
+    <title>Modifier compte</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="style/style.css" rel="stylesheet">
@@ -39,8 +39,12 @@ if (isset($_SESSION["connexion"])){
         }
 
         $conn->query('SET NAMES utf8');
+        $user = $_SESSION['user'];
         $sql = "SELECT 'user', 'mdp', 'id' FROM utilisateur";
         $result = $conn->query($sql);
+        $monUser = "SELECT user, id FROM utilisateur WHERE user LIKE '" . $user . "'";
+        $leUser = $conn->query($monUser)->fetch_assoc();
+
         $user = $mdp = $cmdp = "";
         $userErreur = $mdpErreur = $cmdpErreur = "";
         $erreur = false;
@@ -77,8 +81,10 @@ if (isset($_SESSION["connexion"])){
                     $testUser = $conn->query($codeTestUser);
 
                     if ($testUser->num_rows >= 1){
+                        if ($user != $leUser['user']){
                         $userErreur = "Cette utilisateur exite déjà";
                         $erreur  = true;
+                        }
                     }
                 }
             }
@@ -86,16 +92,11 @@ if (isset($_SESSION["connexion"])){
             if ($_SERVER['REQUEST_METHOD'] != "POST" || $erreur == true){
                 ?>
                 <div class="container-fluid" style="text-align:center">
-                    <div class="row retour">
-                        <div class="col-3 offset-md-9">
-                            <a href="index.php">Page principal</a>
-                        </div>
-                    </div>
-                    <h1>Création utilisateur</h1>
+                    <h1>Modifier utilisateur</h1>
                     <div class="row" style="text-align:left">
                         <div class="offset-md-5 ">
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                                Utilisateur : </br> <input type="text" name="user" maxLength="40" value="<?php echo $user;?>"><br>
+                                Utilisateur : </br> <input type="text" name="user" maxLength="40" value="<?php echo $leUser["user"];?>"><br>
                                 <p style="color:red;"><?php echo $userErreur; ?></p>
                                 Mots de passe : </br> <input type="password" name="mdp" maxLength="25"><br>
                                 <p style="color:red;"><?php echo $mdpErreur; ?></p>
@@ -104,34 +105,37 @@ if (isset($_SESSION["connexion"])){
                                 <input type="submit">
                             </form>
                         </div>
+                        <div class="offset-5 col-2">
+                            </br>
+                            <a href="profil.php?id=<?php echo $leUser['id']?>">annuler</a> 
+                        </div>
                     </div>
                 </div>
             <?php
         } else {
-            $envoye = "INSERT INTO utilisateur (user, mdp) VALUES ('" . $user . "', '" . $mdpCode . "');";
-            if ($conn->query($envoye) === TRUE) {
-                ?>
-                    <div class="container-fluid" style="text-align:center">
-                        <h1>Utilisateur enregistrer</h1>
-                    </div>
-                    <div class="container-fluid">
-                        <div class= "row">
-                            <div class="offset-md-4 offset-2 col-md-2 col-4">
-                                <a href="index.php">Page principal</a>
-                            </div>
-        
-                            <div class="col-md-2 col-4" >
-                                <a href="newUser.php">Ajouter un autre utilisateur</a>
-                            </div>
+            $supprimer = "DELETE FROM utilisateur WHERE id = " . $leUser['id'];
+            if ($conn->query($supprimer) === TRUE) {
+                $envoye = "INSERT INTO utilisateur (user, mdp, id) VALUES ('" . $user . "', '" . $mdpCode . "' , '" .  $leUser['id'] . "');";
+                if ($conn->query($envoye) === TRUE) {
+                    ?>
+                        <div class="container-fluid" style="text-align:center">
+                            <h1>Utilisateur modifier</h1>
+                            <a href="profil.php?id=<?php echo $leUser['id']?>">profil</a> 
                         </div>
-                    </div>
-                <?php
+                    <?php
+                } else {
+                    ?>
+                    <h1><?php echo "Error: " . $envoye . "<br>" . $conn->error; ?></h1>
+                    <a href="index.php">Page principal</a>
+                    <?php
+                }
             } else {
                 ?>
-                <h1><?php echo "Error: " . $envoye . "<br>" . $conn->error; ?></h1>
-                <a class="optionBar" href="index.php">Page principal</a>
+                <h1><?php echo "Error: " . $supprimer . "<br>" . $conn->error; ?></h1>
+                <a href="index.php">Page principal</a>
                 <?php
             }
+
         }
     }
 

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 18 Septembre 2023 à 14:37
+-- Généré le :  Lun 18 Septembre 2023 à 18:41
 -- Version du serveur :  5.7.11
--- Version de PHP :  7.0.3
+-- Version de PHP :  5.6.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `evenement` (
   `nom` varchar(64) NOT NULL,
   `date` date NOT NULL,
-  `heure` varchar(5) NOT NULL,
   `lieu` varchar(128) NOT NULL,
   `departement` varchar(64) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -42,9 +41,9 @@ CREATE TABLE `evenement` (
 -- Contenu de la table `evenement`
 --
 
-INSERT INTO `evenement` (`nom`, `date`, `heure`, `lieu`, `departement`, `description`, `avisParticipant`, `avisOrganisateur`, `id`) VALUES
-('BIDON', '2023-09-18', '12H00', 'BIDON', 'BIDON', 'BIDON', '0%', '0%', 1),
-('BIDON2', '2023-09-18', '12H00', 'BIDON', 'BIDON', 'BIDON', '0%', '0%', 2);
+INSERT INTO `evenement` (`nom`, `date`, `lieu`, `departement`, `description`, `avisParticipant`, `avisOrganisateur`, `id`) VALUES
+('BIDON', '2023-09-18', 'BIDON', 'BIDON', 'BIDON', '0%', '0%', 1),
+('BIDON2', '2023-09-18', 'BIDON', 'BIDON', 'BIDON', '0%', '0%', 2);
 
 -- --------------------------------------------------------
 
@@ -56,6 +55,14 @@ CREATE TABLE `gestion` (
   `user` int(11) NOT NULL,
   `evenement` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
+
+--
+-- Contenu de la table `gestion`
+--
+
+INSERT INTO `gestion` (`user`, `evenement`) VALUES
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -74,7 +81,8 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`user`, `mdp`, `id`) VALUES
-('chumnon', '18850153f825f7c2f7408b1a79c88dcf221ae1b7', 1);
+('chumnon', '18850153f825f7c2f7408b1a79c88dcf221ae1b7', 1),
+('BIDON', '9e4573b775137e01076e552de92eea7f085f34b0', 5);
 
 -- --------------------------------------------------------
 
@@ -131,7 +139,7 @@ ALTER TABLE `evenement`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `vote`
 --
