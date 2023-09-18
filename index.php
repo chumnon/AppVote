@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION["connexion"])){
 } else {
-    $_SESSION["connexion"] = false;
+    $_SESSION["connexion"] = false
 };
 ?>
 
