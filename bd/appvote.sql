@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Jeu 14 Septembre 2023 à 20:19
+-- Généré le :  Lun 18 Septembre 2023 à 14:37
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -38,6 +38,25 @@ CREATE TABLE `evenement` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
 
+--
+-- Contenu de la table `evenement`
+--
+
+INSERT INTO `evenement` (`nom`, `date`, `heure`, `lieu`, `departement`, `description`, `avisParticipant`, `avisOrganisateur`, `id`) VALUES
+('BIDON', '2023-09-18', '12H00', 'BIDON', 'BIDON', 'BIDON', '0%', '0%', 1),
+('BIDON2', '2023-09-18', '12H00', 'BIDON', 'BIDON', 'BIDON', '0%', '0%', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `gestion`
+--
+
+CREATE TABLE `gestion` (
+  `user` int(11) NOT NULL,
+  `evenement` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +68,13 @@ CREATE TABLE `utilisateur` (
   `mdp` varchar(1024) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
+
+--
+-- Contenu de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`user`, `mdp`, `id`) VALUES
+('chumnon', '18850153f825f7c2f7408b1a79c88dcf221ae1b7', 1);
 
 -- --------------------------------------------------------
 
@@ -73,6 +99,13 @@ ALTER TABLE `evenement`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `gestion`
+--
+ALTER TABLE `gestion`
+  ADD PRIMARY KEY (`user`,`evenement`),
+  ADD KEY `FK_GESTIONE` (`evenement`);
+
+--
 -- Index pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
@@ -93,12 +126,12 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `vote`
 --
@@ -107,6 +140,13 @@ ALTER TABLE `vote`
 --
 -- Contraintes pour les tables exportées
 --
+
+--
+-- Contraintes pour la table `gestion`
+--
+ALTER TABLE `gestion`
+  ADD CONSTRAINT `FK_GESTIONE` FOREIGN KEY (`evenement`) REFERENCES `evenement` (`id`),
+  ADD CONSTRAINT `FK_gestionaire` FOREIGN KEY (`user`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `vote`

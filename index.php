@@ -1,5 +1,5 @@
 <?php 
-session_start()
+session_start();
 if (isset($_SESSION["connexion"])){
 } else {
     $_SESSION["connexion"] = false;
@@ -52,63 +52,48 @@ if (isset($_SESSION["connexion"])){
                     </div>
                 </div>
                 <div class="row selectEvent">
+                    <div class= "offset-md-2 col-md-8" >
+                        <h2>Choix d'évènement</h2>
+                        <select class="choixEvent">
+                            <?php
+                            if ($result->num_rows > 0){
+                                while($row = $result->fetch_assoc()){
+                                    ?>
+                                    <option value="<?php echo $row['id']?>"><?php echo $row['nom']?>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <option value="-1">Aucun évènement</option>
+                                <?php
+                            }
+                            ?>
+                        <select>
+                    </div>
                 </div>
-                <div class="row optionEvent">
+                <div class="row optionEvent ">
+                    <div class="offset-md-1 col-md-4 col-6">
+                        <a class="modEvent" href="modEvent.php?id=<?php echo $row['id']?>">Modifier l'évènement</a>
+                    </div>
+                    <div class="offset-md-2 col-md-4 col-6">
+                        <a class="addEvent" href="newEvent.php">Ajouter un évènement</a>
+                    </div> 
                 </div>
                 <div class="row optionVote">
+                    <div class="col-4">
+                        <a class="voteP" href="voteP.php?id=<?php echo $row['id']?>">Vote participant</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="voteO" href="voteO.php?id=<?php echo $row['id']?>">Vote organisateur</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="result" href="showVote.php?id=<?php echo $row['id']?>">Voir résultat</a>
+                    </div>
                 </div>
             </div>
-                <?php
-                if ($result->num_rows > 0){
-                    while($row = $result->fetch_assoc()){
-                        ?>
-                            <div class="card unJet">
-                                <img class="card-img-top" src="<?php echo $row['img'] ?>" alt="Card image" style="width:100%"/>
-                                <div class="card-body">
-                                    <h4 class="card-title"><?php echo $row['nom']?></h4>
-                                    <p class="card-text">
-                                        <?php echo $row['pays']?><br>
-                                        <?php echo $row['role']?><br>
-                                    </p>
-                                    <?php
-                                        if($droit["droit"] === "admin"){
-                                            ?>
-                                            <a href="modifier.php?id=<?php echo $row['id']?>" class="modifier">modifier</a>
-                                            <?php
-                                        }
-                                    ?>
-                                </div>
-                            </div>
-                        <?php
-                    }
-                } else {
-                    echo "0 results";
-                }
-                ?>
-                </div>  
-            </div>
-            <?php
-                if($droit["droit"] === "admin"){
-                ?>
-                    <div class="container-fluid">
-                        <div class= "row bar">
-                            <div class="offset-md-4 offset-2 col-md-2 col-4">
-                                <div class="optionStyle">
-                                    <a class="optionBar" href="ajouter.php">Ajouter</a>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 col-4" >
-                                <div class="optionStyle">
-                                    <a class="optionBar" href="supprimer.php">Supprimer</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php
-                }
-        $conn->close();
-        }
+        <?php        
+    }
+    $conn->close();
     ?>
 </body>
 </html>
