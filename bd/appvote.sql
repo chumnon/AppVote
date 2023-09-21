@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 18 Septembre 2023 à 18:41
+-- Généré le :  Jeu 21 Septembre 2023 à 21:29
 -- Version du serveur :  5.7.11
--- Version de PHP :  5.6.18
+-- Version de PHP :  7.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -62,6 +62,7 @@ CREATE TABLE `gestion` (
 
 INSERT INTO `gestion` (`user`, `evenement`) VALUES
 (1, 1),
+(8, 1),
 (1, 2);
 
 -- --------------------------------------------------------
@@ -82,7 +83,8 @@ CREATE TABLE `utilisateur` (
 
 INSERT INTO `utilisateur` (`user`, `mdp`, `id`) VALUES
 ('chumnon', '18850153f825f7c2f7408b1a79c88dcf221ae1b7', 1),
-('BIDON', '9e4573b775137e01076e552de92eea7f085f34b0', 5);
+('BIDON', '664c2019f9fdad00b3fa0ace08d341b411beca2f', 7),
+('BIDON2', '1505a5b7a9e06544031ee699910ed77d389fa21a', 8);
 
 -- --------------------------------------------------------
 
@@ -139,7 +141,7 @@ ALTER TABLE `evenement`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `vote`
 --

@@ -88,7 +88,7 @@ if (isset($_SESSION["connexion"])){
                 ?>
                 <div class="row optionEvent ">
                     <div class="offset-md-1 col-md-4 col-6">
-                        <a class="modEvent" href="modEvent.php?id=<?php echo $option1?>">Modifier l'évènement</a>
+                        <a class="modEvent" href="unEvent.php?id=<?php echo $option1?>">Info de l'évènement</a>
                     </div>
                     <div class="offset-md-2 col-md-4 col-6">
                         <a class="addEvent" href="newEvent.php">Ajouter un évènement</a>

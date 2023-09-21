@@ -12,7 +12,7 @@ if (isset($_SESSION["connexion"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
+    <title>Évènements</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="style/style.css" rel="stylesheet">
@@ -38,12 +38,20 @@ if (isset($_SESSION["connexion"])){
                 die("Erreur de connection: " . $conn->connect_error);
             }
 
+            if (isset($_GET['id'])){
+                $id = $_GET['id'];
+            } else if (isset ($_POST['id'])){
+                $id = $_POST['id'];
+            } else {
+                    $idErreur = "Erreur chargement de la page";
+                    $erreur = true;
+            }
+
             $conn->query('SET NAMES utf8');
-            $user = $_SESSION['user'];
-            $monUser = "SELECT user, id FROM utilisateur WHERE user LIKE '" . $user . "'";
-            $listeEvent = "SELECT nom, id FROM evenement WHERE id IN (SELECT evenement FROM gestion WHERE user IN (SELECT id FROM utilisateur WHERE user LIKE '" . $user . "'))";
-            $result = $conn->query($listeEvent);
-            $leUser = $conn->query($monUser)->fetch_assoc();
+            $monEvent = "SELECT nom, date, lieu, departement, description, id FROM evenement WHERE id LIKE '" . $id . "'";
+            $listeUser = "SELECT user , id FROM utilisateur WHERE id IN (SELECT user FROM gestion WHERE evenement IN (SELECT id FROM evenement WHERE id LIKE '" . $id . "'))";
+            $result = $conn->query($listeUser);
+            $lEvent = $conn->query($monEvent)->fetch_assoc();
 
             ?>
             <div class="container-fluid menu">
@@ -52,35 +60,44 @@ if (isset($_SESSION["connexion"])){
                         <a href="index.php">Page principal</a>
                     </div>
                 </div>
-                <div class="row leUser">
-                    <h1><?php echo $leUser['user']?></h1>
+                <div class="row lEvent">
+                    <h1><?php echo $lEvent['nom']?></h1>
                 </div>
-                <div class="row modUser">
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <a href="modUser.php">modifier le compte</a>
-                    </div>
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <a href="supUser.php?id=<?php echo $leUser['id']?>">supprimer le compte</a>
-                    </div>
+                <div class="row">
+                    <p>Date: <?php echo $lEvent['date']?></p>
                 </div>
-                <div class="row selectEvent">
+                <div class="row">
+                    <p>Lieu: <?php echo $lEvent['lieu']?></p>
+                </div>
+                <div class="row">
+                    <p>Departement: <?php echo $lEvent['departement']?></p>
+                </div>
+                <div class="row">
+                    <p>Description: </p> </br>
+                    <p><?php echo $lEvent['description']?></p>
+                </div>
+
+                <div class="row gerant">
                     <div class= "offset-md-2 col-md-8" >
-                        <h2>Mes évènements</h2>
+                        <h2>Les gestionnaire:</h2>
+                        <p>
                         <?php
-                        if ($result->num_rows > 0){
+                        if ($result-> num_rows > 0){
                             while($row = $result->fetch_assoc()){
-                                ?>
-                                <a href="unEvent.php?id=<?php echo $row["id"]?>"><?php echo $row['nom']?></a>
-                                </br>
-                                <?php
+                                echo $row["user"]  ?> <?php
                             }
                         } else {
                             ?>
-                            <h3>Aucun évènement</h3>
+                            <h3>Aucun gestionnaire</h3>
                             <?php
                         }
                         ?>
+                        </p>
                     </div>
+                </div>
+
+                <div class="row">
+                    <a href="modEvent.php?id=<?php echo $lEvent["id"]?>">modifier l'évènement</a>
                 </div>
             </div>
         <?php       
