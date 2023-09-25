@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION["connexion"])){
 } else {
     $_SESSION["connexion"] = false;
-}
+};
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +40,8 @@ if (isset($_SESSION["connexion"])){
 
             $conn->query('SET NAMES utf8');
             $user = $_SESSION['user'];
-            $monUser = "SELECT user, id FROM utilisateur WHERE user LIKE '" . $user . "'";
-            $listeEvent = "SELECT nom, id FROM evenement WHERE id IN (SELECT evenement FROM gestion WHERE user IN (SELECT id FROM utilisateur WHERE user LIKE '" . $user . "'))";
+            $monUser = "SELECT user, id FROM utilisateur WHERE id LIKE '" . $user . "'";
+            $listeEvent = "SELECT nom, id FROM evenement WHERE id IN (SELECT evenement FROM gestion WHERE user IN (SELECT id FROM utilisateur WHERE id LIKE '" . $user . "'))";
             $result = $conn->query($listeEvent);
             $leUser = $conn->query($monUser)->fetch_assoc();
             ?>
@@ -123,7 +123,7 @@ if (isset($_SESSION["connexion"])){
                 var eventChoisi = $(this).val();// Récupérez la valeur sélectionnée
                     
                 // Mettez à jour les liens avec la nouvelle valeur
-                $(".modEvent").attr("href", "modEvent.php?id=" + eventChoisi);
+                $(".modEvent").attr("href", "unEvent.php?id=" + eventChoisi);
                 $(".voteP").attr("href", "voteP.php?id=" + eventChoisi);
                 $(".voteO").attr("href", "voteO.php?id=" + eventChoisi);
                 $(".result").attr("href", "showVote.php?id=" + eventChoisi);

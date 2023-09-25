@@ -16,6 +16,7 @@ if (isset($_SESSION["connexion"])){
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="style/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <?php
@@ -54,8 +55,6 @@ if (isset($_SESSION["connexion"])){
         $listeUserNonMod = "SELECT user , id FROM utilisateur WHERE id NOT IN (SELECT user FROM gestion WHERE evenement IN (SELECT id FROM evenement WHERE id LIKE '" . $id . "'))";
         $listeUserMod = "SELECT user , id FROM utilisateur WHERE id IN (SELECT user FROM gestion WHERE evenement IN (SELECT id FROM evenement WHERE id LIKE '" . $id . "')) AND user NOT LIKE '" . $user . "'";
         $lEvent = $conn->query($monEvent)->fetch_assoc();
-        $nonMod = $conn->query($listeUserNonMod);
-        $mod = $conn->query($listeUserMod);
 
         $nom = $lEvent['nom']; 
         $date =  $lEvent['date']; 
@@ -66,7 +65,7 @@ if (isset($_SESSION["connexion"])){
         $nomErreur = $dateErreur = $lieuErreur = $departementErreur = $descriptionErreur = "";
         $erreur = false;
         
-            if($_SERVER['REQUEST_METHOD'] == "POST"){
+            if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['modEvent'])){
                 if(empty($_POST['nom'])){
                     $nomErreur = "Le nom ne peut pas être vide";
                     $erreur  = true;
@@ -103,6 +102,28 @@ if (isset($_SESSION["connexion"])){
                 }
             }
 
+            if(isset($_POST['ajouter'])){
+                $giveDroit = "INSERT INTO gestion (user , evenement) VALUES ('" . $_POST['idMod'] . "', '" . $lEvent['id'] . "');";
+                if ($conn->query($giveDroit) != TRUE) {
+                    echo '<script type="text/javascript">';
+                    echo ' alert("Droit non accordé")'; 
+                    echo '</script>';
+                }
+            }
+
+            if(isset($_POST['sup'])){
+                $enleverDroit = "DELETE FROM gestion WHERE user LIKE '" . $_POST['idMod'] . "' AND evenement LIKE '" . $lEvent['id'] . "'";
+                if ($conn->query($enleverDroit) != TRUE) {
+                    echo '<script type="text/javascript">';
+                    echo ' alert("Droit non accordé")'; 
+                    echo '</script>';
+                }
+            }
+
+            
+            $nonMod = $conn->query($listeUserNonMod);
+            $mod = $conn->query($listeUserMod);
+
             ?>
             <div class="container-fluid" style="text-align:center">
             <div class="row retour">
@@ -115,8 +136,6 @@ if (isset($_SESSION["connexion"])){
             <h1>Modification évènement</h1>
                 <div class="row">
             <?php
-            echo $_SERVER['REQUEST_METHOD'];
-            
                 ?>
                 <div class="offset-md-2 col-md-4">
                     <div class="row" style="text-align:left">
@@ -131,15 +150,26 @@ if (isset($_SESSION["connexion"])){
                                     <p style="color:red;"><?php echo $departementErreur; ?></p>
                                     Description : </br> <input type="text" name="description" maxLength="255" value="<?php echo $description;?>"><br>
                                     <p style="color:red;"><?php echo $descriptionErreur; ?></p>
-                                    <input type="submit">
+                                    <input type="submit" name="modEvent">
                                     <input type="hidden" name="id" value="<?php echo $id;?>">
                         </form>
+                        <?php
+                        if($_SERVER['REQUEST_METHOD'] == "POST" && $erreur != true && isset($_POST['modEvent'])){
+                            $update = "UPDATE evenement SET nom = '" . $nom . "', date = '" . $date ."', lieu = '" . $lieu ."', departement = '" . $departement ."', description = '" . $description ."' WHERE id = " . $lEvent['id'];
+                            if ($conn->query($update) === TRUE) {
+                                echo '<script type="text/javascript">';
+                                echo ' alert("Evenement modifier")'; 
+                                echo '</script>';
+                            } else {
+                                ?>
+                                <h1><?php echo "Error: " . $update . "<br>" . $conn->error; ?></h1>
+                                <?php
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
-                <?php
-            if ($_SERVER['REQUEST_METHOD'] == "POST" || $erreur != true){
-                $_SERVER['REQUEST_METHOD'] = "GET";
-            }
+            <?php
         }
         ?>
             <div class="col-md-4">
@@ -150,9 +180,13 @@ if (isset($_SESSION["connexion"])){
                         <?php
                         if ($nonMod->num_rows > 0){
                             while($row = $nonMod->fetch_assoc()){
+                            if (isset($option1)){
+                                } else {
+                                    $option1 = $row['id'];
+                                }
                             ?>
-                                <option value="<?php echo $row['id']?>"><?php echo $row['user']?>
-                                <?php
+                                <option value="<?php echo $row['id']?>"><?php echo $row['user']?></option>
+                            <?php
                             }
                         } else {
                             ?>
@@ -161,7 +195,18 @@ if (isset($_SESSION["connexion"])){
                         }
                         ?>
                         </select>
-                        <button id="addMod">ajouter</button>
+                        <?php
+                        if ($nonMod->num_rows > 0){
+                            ?>
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                                <input type="submit" name="ajouter" value="ajouter">
+                                <input type="hidden" name="id" value="<?php echo $id;?>">
+                                <input class="modChoisi" type="hidden" name="idMod" value="<?php echo $option1;?>">
+                             </form>
+                             <?php
+                        } else {
+                        }
+                        ?>
                         </div>
                         <div class="row" style="text-align:left">
                             <h3>Gestionnaire</h3>
@@ -175,8 +220,19 @@ if (isset($_SESSION["connexion"])){
                                             <a><?php echo $row['user']?></a>
                                         </div>
                                         <div class="col-1">
-                                            <a class="supMod" id="supMod <?php echo $row['id']?>">x</a>
-                                            </div>
+                                            <?php
+                                            if ($row['id'] == $_SESSION['user']){
+                                            } else {
+                                            ?>
+                                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                                                <input type="submit" name="sup" value="x">
+                                                <input type="hidden" name="id" value="<?php echo $id;?>">
+                                                <input class="modChoisi" type="hidden" name="idMod" value="<?php echo $row['id']?>">
+                                            </form>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
                                         </div>
                                     </div>
                                     <?php
@@ -203,21 +259,17 @@ if (isset($_SESSION["connexion"])){
 
     $conn->close();
     ?>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function () {
-            var listenonMod = $("#listenonMod");
-            var boutonAdd = $("#addMod");
-            var boutonAdd = $("#supMod");
+            var listeNonMod = $("#listenonMod");
+            listeNonMod.val(listeEvent.find('option:first').val()); //Retour à la première valeur
 
-            boutonAdd.on("click", function () {
-                var eventChoisi = $(this).val();// Récupérez la valeur sélectionnée
+            listeNonMod.on("change", function () {
+                var modChoisi = $(this).val();// Récupérez la valeur sélectionnée
                     
                 // Mettez à jour les liens avec la nouvelle valeur
-                $(".modEvent").attr("href", "modEvent.php?id=" + eventChoisi);
-                $(".voteP").attr("href", "voteP.php?id=" + eventChoisi);
-                $(".voteO").attr("href", "voteO.php?id=" + eventChoisi);
-                $(".result").attr("href", "showVote.php?id=" + eventChoisi);
+                $(".modEvent").attr("value", modChoisi);
             });
         });
     </script>

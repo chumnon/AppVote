@@ -89,7 +89,10 @@ $_SESSION["connexion"] = false;
             <?php
         } else {
             $_SESSION["connexion"] = true;
-            $_SESSION["user"] = $user;
+            $leUser =  "SELECT id FROM utilisateur WHERE user LIKE '" . $user . "'";
+            $lID = $conn->query($leUser)->fetch_assoc();
+            $_SESSION["user"] = $lID['id'];
+            echo $_SESSION["user"];
             $url = "http://localhost/AppVote";
             header('Location:' . $url);
             Exit();

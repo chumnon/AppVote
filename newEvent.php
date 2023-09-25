@@ -43,7 +43,7 @@ if (isset($_SESSION["connexion"])){
         $result = $conn->query($sql);
 
         $user = $_SESSION['user'];
-        $monUser = "SELECT user, id FROM utilisateur WHERE user LIKE '" . $user . "'";
+        $monUser = "SELECT user, id FROM utilisateur WHERE id LIKE '" . $user . "'";
         $leUser = $conn->query($monUser)->fetch_assoc();
 
         $nom = $date = $lieu = $departement = $description = "";
@@ -116,7 +116,7 @@ if (isset($_SESSION["connexion"])){
                 </div>
             <?php
         } else {
-            $envoye = "INSERT INTO evenement (nom, date, lieu, departement, description, avisParticipant, avisOrganisateur) VALUES ('" . $nom . "', '" . $date . "', '" . $lieu . "', '" . $departement . "', '" . $description . "', '0%', '0%');";
+            $envoye = "INSERT INTO evenement (nom, date, lieu, departement, description, avisParticipant, avisOrganisateur) VALUES ('" . $nom . "', '" . $date . "', '" . $lieu . "', '" . $departement . "', '" . $description . "', '0', '0');";
             if ($conn->query($envoye) === TRUE) {
                 $getDroit = "SELECT nom , id FROM evenement ";
                 $listeEvent = $conn->query($getDroit);

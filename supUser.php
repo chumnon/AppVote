@@ -40,7 +40,7 @@ if (isset($_SESSION["connexion"])){
 
             $conn->query('SET NAMES utf8');
             $user = $_SESSION['user'];
-            $monUser = "SELECT user, id FROM utilisateur WHERE user LIKE '" . $user . "'";
+            $monUser = "SELECT user, id FROM utilisateur WHERE id LIKE '" . $user . "'";
             $leUser = $conn->query($monUser)->fetch_assoc();
 
             

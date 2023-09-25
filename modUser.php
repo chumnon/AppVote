@@ -42,7 +42,7 @@ if (isset($_SESSION["connexion"])){
         $user = $_SESSION['user'];
         $sql = "SELECT 'user', 'mdp', 'id' FROM utilisateur";
         $result = $conn->query($sql);
-        $monUser = "SELECT user, id FROM utilisateur WHERE user LIKE '" . $user . "'";
+        $monUser = "SELECT user, id FROM utilisateur WHERE id LIKE '" . $user . "'";
         $leUser = $conn->query($monUser)->fetch_assoc();
 
         $user = $mdp = $cmdp = "";
@@ -113,7 +113,6 @@ if (isset($_SESSION["connexion"])){
                 </div>
             <?php
         } else {
-            $supprimer = "DELETE FROM utilisateur WHERE id = " . $leUser['id'];
             $update = "UPDATE utilisateur SET user = '" . $user . "', mdp = '" . $mdpCode ."' WHERE id = " . $leUser['id'];
             if ($conn->query($update) === TRUE) {
                 ?>

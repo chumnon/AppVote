@@ -40,8 +40,8 @@ if (isset($_SESSION["connexion"])){
 
             $conn->query('SET NAMES utf8');
             $user = $_SESSION['user'];
-            $monUser = "SELECT user, id FROM utilisateur WHERE user LIKE '" . $user . "'";
-            $listeEvent = "SELECT nom, id FROM evenement WHERE id IN (SELECT evenement FROM gestion WHERE user IN (SELECT id FROM utilisateur WHERE user LIKE '" . $user . "'))";
+            $monUser = "SELECT user, id FROM utilisateur WHERE id LIKE '" . $user . "'";
+            $listeEvent = "SELECT nom, id FROM evenement WHERE id IN (SELECT evenement FROM gestion WHERE user IN (SELECT id FROM utilisateur WHERE id LIKE '" . $user . "'))";
             $result = $conn->query($listeEvent);
             $leUser = $conn->query($monUser)->fetch_assoc();
 

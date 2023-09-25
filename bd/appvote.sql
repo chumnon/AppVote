@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Jeu 21 Septembre 2023 à 21:29
+-- Généré le :  Lun 25 Septembre 2023 à 18:54
 -- Version du serveur :  5.7.11
--- Version de PHP :  7.0.3
+-- Version de PHP :  5.6.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -42,8 +42,8 @@ CREATE TABLE `evenement` (
 --
 
 INSERT INTO `evenement` (`nom`, `date`, `lieu`, `departement`, `description`, `avisParticipant`, `avisOrganisateur`, `id`) VALUES
-('BIDON', '2023-09-18', 'BIDON', 'BIDON', 'BIDON', '0%', '0%', 1),
-('BIDON2', '2023-09-18', 'BIDON', 'BIDON', 'BIDON', '0%', '0%', 2);
+('BIDON', '2023-09-18', 'BIDON', 'BIDON', 'BIDON', '75', '50', 1),
+('BIDON2', '2023-09-27', 'BIDON2', 'BIDON2', 'BIDON2', '0', '0', 2);
 
 -- --------------------------------------------------------
 
@@ -62,8 +62,9 @@ CREATE TABLE `gestion` (
 
 INSERT INTO `gestion` (`user`, `evenement`) VALUES
 (1, 1),
-(8, 1),
-(1, 2);
+(7, 1),
+(1, 2),
+(8, 2);
 
 -- --------------------------------------------------------
 
@@ -95,8 +96,18 @@ INSERT INTO `utilisateur` (`user`, `mdp`, `id`) VALUES
 CREATE TABLE `vote` (
   `id` int(11) NOT NULL,
   `avis` varchar(4) NOT NULL,
+  `participant` tinyint(1) NOT NULL,
   `evenementID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
+
+--
+-- Contenu de la table `vote`
+--
+
+INSERT INTO `vote` (`id`, `avis`, `participant`, `evenementID`) VALUES
+(1, '50', 1, 1),
+(2, '100', 1, 1),
+(3, '50', 0, 1);
 
 --
 -- Index pour les tables exportées
@@ -146,7 +157,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Contraintes pour les tables exportées
 --
