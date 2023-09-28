@@ -38,48 +38,70 @@ if (isset($_SESSION["connexion"])){
                 die("Erreur de connection: " . $conn->connect_error);
             }
 
+            if (isset($_GET['id'])){
+                $id = $_GET['id'];
+            } else if (isset ($_POST['id'])){
+                $id = $_POST['id'];
+            } else {
+                    $id = -1;
+                    echo "Erreur lors du chargement de la page"
+                    $erreur = true;
+            }
+
             $conn->query('SET NAMES utf8');
-            $user = $_SESSION['user'];
-            $monUser = "SELECT user, id FROM utilisateur WHERE id LIKE '" . $user . "'";
-            $leUser = $conn->query($monUser)->fetch_assoc();
+            $monEvent = "SELECT nom, id FROM evenement WHERE id LIKE '" . $id . "'";
+            $lEvent = $conn->query($monEvent)->fetch_assoc();
 
             
             if ($_SERVER['REQUEST_METHOD'] != "POST"){
+                ECHO $lEvent["id"];
             ?>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
             <div class="container-fluid menu">
                 <div class="row warning">
-                    <h1>ATTENTION, VOUS ÊTES SUR LE POINT DE SUPPRIMER LE COMPTE SUIVANT:</h1>
-                    <h1><?php echo $leUser['user']?></h1>
+                    <h1>ATTENTION, VOUS ÊTES SUR LE POINT DE SUPPRIMER L'ÉVÈNEMENT SUIVANT:</h1>
+                    <h1><?php echo $lEvent['nom']?></h1>
                     <h1>ÊTES-VOUS SÛR DE VOULOIR LE SUPPRIMER?</h1>
                 </div>
                 <div class="row confirm">
                     <div class="col-6 offset-md-2 col-md-3">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                         <input type="submit" value="oui">
+                        <input type="hidden" name="id" value="<?php echo $id;?>">
+                    <form>
                     </div>
                     <div class="col-6 offset-md-2 col-md-3">
-                        <a href="profil.php?id=<?php echo $leUser['id']?>">non</a>
+                        <a href="unEvent.php?id=<?php echo $lEvent['id']?>">non</a>
                     </div>
                 </div>
             </div>
             </form>
             <?php
             } else {
-                $destroyDroit = "DELETE FROM gestion WHERE user LIKE '" . $leUser['id'] . "'";
-                $destroy = "DELETE FROM utilisateur WHERE id LIKE '" . $leUser['id'] . "'";
+                echo  $lEvent['id'];
+                $destroyDroit = "DELETE FROM gestion WHERE evenement LIKE '" . $lEvent['id'] . "'";
+                $destroyVote = "DELETE FROM vote WHERE evenementID LIKE '" . $lEvent['id'] . "'";
+                $destroy = "DELETE FROM evenement WHERE id LIKE '" . $lEvent['id'] . "'";
                 if ($conn->query($destroyDroit) === TRUE) {
-                    if ($conn->query($destroy) === TRUE) {
-                        ?>
-                        <div class="container-fluid menu">
-                            <h1>Le compte a bien été supprimer</h1>
-                            <a href="connection.php">Page de connection</a>
-                        </div>
-                        <?php
+                    if($conn->query($destroyVote) === TRUE) {
+                        if ($conn->query($destroy) === TRUE) {
+                            echo $destroyDroit;
+                            ?>
+                            <div class="container-fluid menu">
+                                <h1>L'évènement a bien été supprimer</h1>
+                                <a href="index.php">Page d'accueil</a>
+                            </div>
+                            <?php
+                        } else {
+                            ?><h1><?php echo "Error: " . $destroy . "<br>" . $conn->error; ?></h1>
+                            <a class="optionBar" href="index.php">page principal</a>
+                            <?php
+                        } 
                     } else {
-                        ?><h1><?php echo "Error: " . $destroy . "<br>" . $conn->error; ?></h1>
+                        ?><h1><?php echo "Error: " . $destroyVote . "<br>" . $conn->error; ?></h1>
                         <a class="optionBar" href="index.php">page principal</a>
                         <?php
-                    } 
+                    }
                 } else {
                     ?><h1><?php echo "Error: " . $destroyDroit . "<br>" . $conn->error; ?></h1>
                     <a class="optionBar" href="index.php">page principal</a>

@@ -99,6 +99,9 @@ if (isset($_SESSION["connexion"])){
                 <div class="row">
                     <a href="modEvent.php?id=<?php echo $lEvent["id"]?>">modifier l'évènement</a>
                 </div>
+                <div class="row">
+                    <a href="supEvent.php?id=<?php echo $lEvent["id"]?>">supprimer l'évènement</a>
+                </div>
             </div>
         <?php       
         $conn->close();
