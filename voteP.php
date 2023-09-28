@@ -47,30 +47,172 @@ if (isset($_SESSION["connexion"])){
                     $erreur = true;
             }
 
+            if (isset($_GET['valeur'])){
+                $valeur = $_GET['valeur'];
+            } else if (isset ($_POST['valeur'])){
+                $valeur = $_POST['valeur'];
+            } else {
+                    $valeur = -1;
+            }
+
             $conn->query('SET NAMES utf8');
             $monEvent = "SELECT nom, id FROM evenement WHERE id LIKE '" . $id . "'";
             $lEvent = $conn->query($monEvent)->fetch_assoc();
 
-            ?>
-            <div class="container-fluid menu ">
-                <div class="row">
-                    <h1><?php echo $lEvent['nom']?></h1>
-                </div>
-                <div class="row space">
-                </div>
-                <div class="row">
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                        <input type="range" class="form-range">
-                        <input type="hidden" name="vote" value="null">
-                    </form>
-                </div>
-                <div class="row">
-                    <h1><?php echo $lEvent['nom']?></h1>
-                </div>
-            <?php
+            if($valeur === -1 || $_SERVER['REQUEST_METHOD'] != "POST"){
+                ?>
+                    <div class="container-fluid menu ">
+                        <div class="row">
+                            <h1><?php echo $lEvent['nom']?></h1>
+                        </div>
+                        <div class="row space">
+                            <canvas id="monCanvas" ></canvas>
+                        </div>
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                            <div class="row">
+                                <input type="range" class="form-range" name="range" id="range">
+                                <input type="hidden" class="valeur" name="valeur" value="-1">
+                            </div>
+                            <div class="row">
+                                <input type="hidden" name="vote" class="bouton">
+                                <input type="hidden" name="id" value="<?php echo $id;?>">
+                        </form>
+                        </div>
+                    <?php
+            } else {
+                echo "YES";
+                ?>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                    <input type="hidden" class="valeur" name="valeur" value="-1">
+                    <input type="hidden" name="id" value="<?php echo $id;?>">
+                </form>
+                <?php
+
+                $page = $_SERVER['PHP_SELF'];
+                $sec = "2";
+                header("Refresh: $sec; url=$page?id=" . $id);
+            }
         $conn->close();
         }
     ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var range = $("#range");
+            var canvas = document.getElementById('monCanvas');
+            var context = canvas.getContext('2d');
+
+            var rouge = 155;
+            var vert = 155;
+            var bleu= 155;
+            var mid = 1;
+            var Ax = 130; var Ay = 65;
+            var Bx = 150; var By = 65;
+            var Cx = 170; var Cy = 65;
+            
+            context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+            context.beginPath();
+            context.arc(150, 50, 40, 0, 2 * Math.PI);
+            context.fill();
+
+            context.fillStyle="white";
+            context.beginPath();
+            context.arc(150, 50, 35, 0, 2 * Math.PI);
+            context.fill();
+
+            context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+            context.beginPath();
+            context.arc(135, 40, 4, 0, 2 * Math.PI);
+            context.fill();
+            context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+            context.beginPath();
+            context.arc(165, 40, 4, 0, 2 * Math.PI);
+            context.fill();
+
+            context.beginPath();
+            context.moveTo(Ax, Ay);
+            context.quadraticCurveTo(Bx, By, Cx, Cy);
+            context.strokeStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+            context.lineWidth = 4;
+            context.stroke();
+
+            range.on("input", function () {
+                $(".valeur").attr("value", range.val());
+                $(".bouton").attr("type", "submit");
+                if(range.val()<=50){
+                    mid = 1;
+                } else {
+                    mid = 0;
+                }
+
+                bleu = 0;
+                Ay = 70 - (range.val()*10/100);
+                By = 40 + (range.val()*50/100);
+                Cy = 70 - (range.val()*10/100);
+                if(mid == 1){
+                    vert = 0 + 2 * (range.val() * 255 / 100);
+                    rouge = 255;
+                    context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+                    context.beginPath();
+                    context.arc(150, 50, 40, 0, 2 * Math.PI);
+                    context.fill();
+
+                    context.fillStyle="white";
+                    context.beginPath();
+                    context.arc(150, 50, 35, 0, 2 * Math.PI);
+                    context.fill();
+
+                    context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+                    context.beginPath();
+                    context.arc(135, 40, 4, 0, 2 * Math.PI);
+                    context.fill();
+                    context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+                    context.beginPath();
+                    context.arc(165, 40, 4, 0, 2 * Math.PI);
+                    context.fill();
+
+                    context.beginPath();
+                    context.moveTo(Ax, Ay);
+                    context.quadraticCurveTo(Bx, By, Cx, Cy);
+                    context.strokeStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+                    context.lineWidth = 4;
+                    context.stroke();
+                } else {
+                    vert = 255;
+                    rouge = 255 - ((range.val()-50) * 255 / 50);
+                    context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+                    context.beginPath();
+                    context.arc(150, 50, 40, 0, 2 * Math.PI);
+                    context.fill();
+
+                    context.fillStyle="white";
+                    context.beginPath();
+                    context.arc(150, 50, 35, 0, 2 * Math.PI);
+                    context.fill();
+
+                    context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+                    context.beginPath();
+                    context.arc(135, 40, 4, 0, 2 * Math.PI);
+                    context.fill();
+                    context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+                    context.beginPath();
+                    context.arc(165, 40, 4, 0, 2 * Math.PI);
+                    context.fill();
+
+                    context.beginPath();
+                    context.moveTo(Ax, Ay);
+                    context.quadraticCurveTo(Bx, By, Cx, Cy);
+                    context.strokeStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+                    context.lineWidth = 4;
+                    context.stroke();
+                }
+                
+               
+            });
+        });
+        
+        
+    </script>
 
 </body>
 </html>
