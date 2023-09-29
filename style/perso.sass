@@ -1,0 +1,53 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+$form-range-track-width:          50%;
+$form-range-track-height:         .5rem;
+$form-range-track-cursor:         pointer;
+$form-range-track-bg:             $gray-300;
+$form-range-track-border-radius:  1rem;
+$form-range-track-box-shadow:     $box-shadow-inset;
+
+$form-range-thumb-width:                   1rem;
+$form-range-thumb-height:                  $form-range-thumb-width;
+$form-range-thumb-bg:                      $component-active-bg;
+$form-range-thumb-border:                  0;
+$form-range-thumb-border-radius:           1rem;
+$form-range-thumb-box-shadow:              0 .1rem .25rem rgba($black, .1);
+$form-range-thumb-focus-box-shadow:        0 0 0 1px $body-bg, $input-focus-box-shadow;
+$form-range-thumb-focus-box-shadow-width:  $input-focus-width; // For focus box shadow issue in Edge
+$form-range-thumb-active-bg:               tint-color($component-active-bg, 70%);
+$form-range-thumb-disabled-bg:             $gray-500;
+$form-range-thumb-transition:              background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+.form-range-track {
+    width: $form-range-track-width;
+    height: $form-range-track-height;
+    cursor: $form-range-track-cursor;
+    background-color: $form-range-track-bg;
+    border-radius: $form-range-track-border-radius;
+    box-shadow: $form-range-track-box-shadow;
+}
+
+.form-range-thumb {
+    width: $form-range-thumb-width;
+    height: $form-range-thumb-height;
+    background-color: $form-range-thumb-bg;
+    border: $form-range-thumb-border;
+    border-radius: $form-range-thumb-border-radius;
+    box-shadow: $form-range-thumb-box-shadow;
+    transition: $form-range-thumb-transition;
+}
+
+.form-range-thumb:focus {
+    box-shadow: $form-range-thumb-focus-box-shadow;
+    width: $form-range-thumb-focus-box-shadow-width;
+    outline: none;
+}
+
+.form-range-thumb:active {
+    background-color: $form-range-thumb-active-bg;
+}
+
+.form-range-thumb:disabled {
+    background-color: $form-range-thumb-disabled-bg;
+}
