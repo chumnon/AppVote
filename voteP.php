@@ -14,8 +14,11 @@ if (isset($_SESSION["connexion"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Évènements</title>
 
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/scss/bootstrap.scss" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
+    <link href="style/perso.css" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -66,10 +69,10 @@ if (isset($_SESSION["connexion"])){
                             <h1><?php echo $lEvent['nom']?></h1>
                         </div>
                         <div class="row space">
-                            <canvas id="monCanvas" ></canvas>
+                            <canvas id="monCanvas" width="300" height="100">" ></canvas>
                         </div>
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                            <div class="row">
+                            <div class="row rangeRow">
                                 <input type="range" class="form-range" name="range" id="range">
                                 <input type="hidden" class="valeur" name="valeur" value="-1">
                             </div>
@@ -101,14 +104,19 @@ if (isset($_SESSION["connexion"])){
             var range = $("#range");
             var canvas = document.getElementById('monCanvas');
             var context = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = 300 * dpr;
+            canvas.height = 100 * dpr;
+            
+            context.scale(dpr, dpr);
 
             var rouge = 155;
             var vert = 155;
             var bleu= 155;
             var mid = 1;
-            var Ax = 130; var Ay = 65;
+            var Ax = 125; var Ay = 65;
             var Bx = 150; var By = 65;
-            var Cx = 170; var Cy = 65;
+            var Cx = 175; var Cy = 65;
             
             context.fillStyle = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
             context.beginPath();
@@ -146,9 +154,9 @@ if (isset($_SESSION["connexion"])){
                 }
 
                 bleu = 0;
-                Ay = 70 - (range.val()*10/100);
+                Ay = 72 - (range.val()*14/100);
                 By = 40 + (range.val()*50/100);
-                Cy = 70 - (range.val()*10/100);
+                Cy = 72 - (range.val()*14/100);
                 if(mid == 1){
                     vert = 0 + 2 * (range.val() * 255 / 100);
                     rouge = 255;

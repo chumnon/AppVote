@@ -16,5 +16,11 @@
 }
 
 .space{
-    height: 400px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    justify-content: center;
+}
+
+.rangeRow{
+    justify-content: center;
 }
