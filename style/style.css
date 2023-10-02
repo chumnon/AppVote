@@ -24,4 +24,39 @@
 
 .rangeRow{
     justify-content: center;
+    margin-bottom: 100px;
 }
+
+.form-range{
+    width: 70%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: rgb(155, 154, 154);
+    height: 3rem;
+    border-radius: 100px;
+    
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    background: rgb(185, 185, 185);
+    height: 3rem;
+    width: 3rem;
+    border-radius: 100px;
+    margin-top: 0rem;
+    appearance: none;
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    background: rgb(207, 206, 206);
+    height: 3rem;
+    width: 3rem;
+    border-radius: 100px;
+    margin-top: 0rem;
+    border: none;
+    outline: none;
+  }

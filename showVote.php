@@ -72,12 +72,14 @@ if (isset($_SESSION["connexion"])){
                 $moyenneP = 0;
             } else {
                 $moyenneP = $totalP / $compteurP;
+                $moyenneP = number_format((float)$moyenneP, 2, '.', '');
             }
 
             if ($compteurO == 0){
                 $moyenneO = 0;
             } else {
                 $moyenneO = $totalO / $compteurO;
+                $moyenneO = number_format((float)$moyenneO, 2, '.', '');
             }
 
             $insertAvis = "UPDATE evenement SET avisParticipant = '" . $moyenneP . "', avisOrganisateur = '" . $moyenneO . "' WHERE id = " . $lEvent['id'];

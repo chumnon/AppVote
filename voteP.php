@@ -4,6 +4,7 @@ if (isset($_SESSION["connexion"])){
 } else {
     $_SESSION["connexion"] = false;
 };
+$_SESSION['vote'] = true;
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +24,7 @@ if (isset($_SESSION["connexion"])){
 <body>
     <?php
         if($_SESSION["connexion"] != true){
+            $_SESSION["connexion"] = false;
             ?>
             <h1>Vous n'êtes pas connecté</h1>
             <a href="connection.php">Page de connection</a>
@@ -83,17 +85,29 @@ if (isset($_SESSION["connexion"])){
                         </div>
                     <?php
             } else {
-                echo "YES";
+                $envoye = "INSERT INTO vote (avis, participant, evenementID) VALUES ('" . $valeur . "', 1, '" . $id . "');";
+            if ($conn->query($envoye) === TRUE) {
                 ?>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                    <input type="hidden" class="valeur" name="valeur" value="-1">
-                    <input type="hidden" name="id" value="<?php echo $id;?>">
-                </form>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                        <input type="hidden" class="valeur" name="valeur" value="-1">
+                        <input type="hidden" name="id" value="<?php echo $id;?>">
+                    </form>
+                    <div class="container-fluid menu ">
+                        <div class="row">
+                            <h1>Merci!</h1>
+                        </div>
+                    </div>
                 <?php
-
                 $page = $_SERVER['PHP_SELF'];
                 $sec = "2";
                 header("Refresh: $sec; url=$page?id=" . $id);
+            } else {
+                ?>
+                <h1><?php echo "Error: " . $envoye . "<br>" . $conn->error; ?></h1>
+                <a class="optionBar" href="index.php">Page principal</a>
+                <?php
+            }
+                
             }
         $conn->close();
         }
@@ -104,7 +118,7 @@ if (isset($_SESSION["connexion"])){
             var range = $("#range");
             var canvas = document.getElementById('monCanvas');
             var context = canvas.getContext('2d');
-            const dpr = window.devicePixelRatio || 1;
+            const dpr = 30;
             canvas.width = 300 * dpr;
             canvas.height = 100 * dpr;
             

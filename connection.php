@@ -1,8 +1,11 @@
 <?php 
 session_start();
 $_SESSION["connexion"] = false;
-?>
 
+if (isset($_SESSION["vote"] )){
+    $_SESSION["vote"] = false;
+};
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

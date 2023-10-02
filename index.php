@@ -1,8 +1,12 @@
 <?php 
 session_start();
-if (isset($_SESSION["connexion"])){
+if (isset($_SESSION["connexion"] )){
 } else {
     $_SESSION["connexion"] = false;
+};
+if (isset($_SESSION["vote"] )){
+} else {
+    $_SESSION["vote"] = false;
 };
 ?>
 
@@ -19,7 +23,9 @@ if (isset($_SESSION["connexion"])){
 </head>
 <body>
     <?php
-    if($_SESSION["connexion"] != true){
+    if($_SESSION["connexion"] != true || $_SESSION["vote"] == true){
+        $_SESSION["vote"] = false;
+        $_SESSION["connexion"] = false;
         ?>
         <h1>Vous n'êtes pas connecté</h1>
         <a href="connection.php">Page de connection</a>
