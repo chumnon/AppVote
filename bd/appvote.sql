@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Jeu 28 Septembre 2023 à 22:05
+-- Généré le :  Lun 02 Octobre 2023 à 13:50
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -32,8 +32,8 @@ CREATE TABLE `evenement` (
   `lieu` varchar(128) NOT NULL,
   `departement` varchar(64) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `avisParticipant` varchar(4) NOT NULL,
-  `avisOrganisateur` varchar(4) NOT NULL,
+  `avisParticipant` varchar(6) NOT NULL,
+  `avisOrganisateur` varchar(6) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
 
@@ -42,8 +42,9 @@ CREATE TABLE `evenement` (
 --
 
 INSERT INTO `evenement` (`nom`, `date`, `lieu`, `departement`, `description`, `avisParticipant`, `avisOrganisateur`, `id`) VALUES
-('BIDON2', '2023-09-27', 'BIDON2', 'BIDON2', 'BIDON2', '0', '0', 2),
-('BIDON', '2023-09-03', 'X', 'X', 'X', '0', '0', 7);
+('BIDON2', '2023-09-27', 'BIDON2', 'BIDON2', 'BIDON2', '0', '59.20', 2),
+('BIDON', '2023-09-03', 'X', 'X', 'X', '48.33', '50.00', 7),
+('BIDON3', '2023-10-16', 'X', 'X', 'X', '50.00', '0', 8);
 
 -- --------------------------------------------------------
 
@@ -64,8 +65,8 @@ INSERT INTO `gestion` (`user`, `evenement`) VALUES
 (1, 2),
 (7, 2),
 (1, 7),
-(7, 7),
-(8, 7);
+(8, 7),
+(1, 8);
 
 -- --------------------------------------------------------
 
@@ -100,6 +101,26 @@ CREATE TABLE `vote` (
   `participant` tinyint(1) NOT NULL,
   `evenementID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
+
+--
+-- Contenu de la table `vote`
+--
+
+INSERT INTO `vote` (`id`, `avis`, `participant`, `evenementID`) VALUES
+(5, '100', 1, 8),
+(6, '0', 1, 8),
+(7, '50', 1, 8),
+(8, '100', 0, 2),
+(9, '0', 0, 2),
+(10, '50', 0, 2),
+(11, '71', 0, 2),
+(12, '75', 0, 2),
+(13, '100', 1, 7),
+(14, '0', 1, 7),
+(15, '45', 1, 7),
+(16, '100', 0, 7),
+(17, '0', 0, 7),
+(18, '85', 1, 2);
 
 --
 -- Index pour les tables exportées
@@ -139,7 +160,7 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
@@ -149,7 +170,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Contraintes pour les tables exportées
 --
