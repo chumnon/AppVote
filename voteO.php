@@ -19,7 +19,6 @@ $_SESSION['vote'] = true;
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/scss/bootstrap.scss" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
-    <link href="style/perso.sass" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -67,8 +66,8 @@ $_SESSION['vote'] = true;
             if($valeur === -1 || $_SERVER['REQUEST_METHOD'] != "POST"){
                 ?>
                     <div class="container-fluid menu ">
-                        <div class="row">
-                            <h1><?php echo $lEvent['nom']?></h1>
+                        <div class="row ">
+                            <h1 class="titre"><?php echo $lEvent['nom']?></h1>
                         </div>
                         <div class="row space">
                             <canvas id="monCanvas" width="300" height="100">" ></canvas>

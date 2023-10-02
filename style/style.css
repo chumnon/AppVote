@@ -1,6 +1,36 @@
+/*FONTS*/
+@font-face{
+    src:url(../fonts/Super\ Dessert.ttf);
+    font-family: dessert;
+}
+@font-face{
+    src:url(../fonts/Super\ Corn.ttf);
+    font-family: corn;
+}
+@font-face{
+    src:url(../fonts/Milky\ Coffee.ttf);
+    font-family: coffee;
+}
 
-.menu{
+/*GENERAL*/
+.banniere{
     text-align: center;
+    padding-top: 0.5vh;
+    height: 9.5vh;
+    background-color: rgba(125, 78, 87);
+}
+
+.navBarOption{
+    color:rgba(245, 241, 237);
+    text-decoration: none;
+    font-family: coffee;
+    font-size: large;
+    text-shadow:rgb(155,119,125) 2px 2px;
+}
+
+.navBarOption:hover{
+    color:rgba(10, 33, 15);
+    text-shadow:rgb(96,67,69) 2px 2px;
 }
 
 @media(min-width: 768px){
@@ -16,6 +46,76 @@
     text-align: right;
 }
 
+.appLogo{
+    font-family: dessert;
+    font-size: 50px;
+    margin-top: -2.5vh;
+    color:rgba(245, 241, 237);
+    text-shadow:rgb(185,160,162) 2px 2px;
+}
+
+.menu{
+    text-align: center;
+    background-color: rgba(241, 136, 5);
+    height: 90vh;
+}
+
+.titre{
+    color: rgba(97, 152, 142);
+    font-family: corn;
+    font-size: 50px;
+    padding-top: 5vh;
+}
+
+/*INDEX*/
+
+.choixEvent{
+    width: 100%;
+    text-align: center;
+    border-radius: 180px;
+    border-color: rgba(97, 152, 142);
+    background-color: rgb(117, 180, 169);
+    color: rgba(10, 33, 15);
+    font-weight: bolder;
+    border-bottom: 2px black;
+}
+
+.unOptionEvent{
+    color: rgba(10, 33, 15);
+    font-weight: bold;
+    border-bottom: 2px black solid;
+}
+.unOptionEvent:checked{
+    background-color: rgba(97, 152, 142);
+}
+
+.optionEvent{
+    margin-top: 10vh;
+    align-items: center;
+}
+
+.optionVote{
+    margin-top: 10vh;
+    align-items: center;
+}
+
+.uneOptionIndex{
+    background-color:rgb(230, 130, 9);
+    border-radius: 100px;
+    color:rgb(245, 241, 237);
+    text-decoration: none;
+    font-family: coffee;
+    font-size: 30px;
+    padding: 50px;
+    width: 30%;
+}
+
+.uneOptionIndex:hover{
+    background-color:rgb(252, 141, 6);
+    border-radius: 100px;
+}
+
+/*VOTE*/
 .space{
     margin-top: 50px;
     margin-bottom: 100px;

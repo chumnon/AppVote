@@ -52,21 +52,30 @@ if (isset($_SESSION["vote"] )){
             $leUser = $conn->query($monUser)->fetch_assoc();
             ?>
             
-            <div class="container-fluid menu">
-                <div class="row optionCon">
+            <div class="container-fluid banniere">
+            <div class="row navBar">
                     <div class="col-4 col-md-2 monProfil">
-                        <a href="profil.php?id=<?php echo $leUser['id']?>">Mon profil</a>
+                        <a class="navBarOption" href="profil.php?id=<?php echo $leUser['id']?>">Mon profil</a>
                     </div>
                     <div class="offset-md-5 col-4 col-md-3 changeUser">
-                        <a href="connection.php">Changer utilisateur</a>
+                        <a class="navBarOption" href="connection.php">Changer utilisateur</a>
                     </div>
                     <div class="col-4 col-md-2">
-                        <a href="newUser.php">Nouvel utilisateur</a>
+                        <a class="navBarOption" href="newUser.php">Nouvel utilisateur</a>
                     </div>
                 </div>
+                <div class="row logo">
+                <div class="offset-3 col-6">
+                    <h1 class="appLogo">M-NAV</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid menu">
+                
                 <div class="row selectEvent">
                     <div class= "offset-md-2 col-md-8" >
-                        <h2>Choix d'évènement</h2>
+                        <h2 class="titre">Choix d'évènement</h2>
                         <select class="choixEvent" id="listeEvent">
                             <?php
                             if ($result->num_rows > 0){
@@ -77,7 +86,7 @@ if (isset($_SESSION["vote"] )){
                                         $option1 = $row['id'];
                                     };
                                     ?>
-                                    <option value="<?php echo $row['id']?>"><?php echo $row['nom']?>
+                                    <option class="unOptionEvent" value="<?php echo $row['id']?>"><?php echo $row['nom']?>
                                     <?php
                                 }
                             } else {
@@ -92,24 +101,24 @@ if (isset($_SESSION["vote"] )){
                 </div>
                 <?php if ($noEvent != true){
                 ?>
-                <div class="row optionEvent ">
-                    <div class="offset-md-1 col-md-4 col-6">
-                        <a class="modEvent" href="unEvent.php?id=<?php echo $option1?>">Info de l'évènement</a>
-                    </div>
-                    <div class="offset-md-2 col-md-4 col-6">
-                        <a class="addEvent" href="newEvent.php">Ajouter un évènement</a>
-                    </div> 
+                <div class="row optionEvent">
+                    <a class="offset-md-1 col-md-4 col-6 modEvent uneOptionIndex" href="unEvent.php?id=<?php echo $option1?>">
+                        Info de l'évènement
+                    </a>
+                    <a class="offset-md-2 col-md-4 col-6 addEvent uneOptionIndex" href="newEvent.php">
+                        Ajouter un évènement
+                    </a> 
                 </div>
                 <div class="row optionVote">
-                    <div class="col-4">
-                        <a class="voteP" href="voteP.php?id=<?php echo $option1?>">Vote participant</a>
-                    </div>
-                    <div class="col-4">
-                        <a class="voteO" href="voteO.php?id=<?php echo $option1?>">Vote organisateur</a>
-                    </div>
-                    <div class="col-4">
-                        <a class="result" href="showVote.php?id=<?php echo $option1?>">Voir résultat</a>
-                    </div>
+                    <a class="voteP uneOptionIndex" href="voteP.php?id=<?php echo $option1?>">
+                        Vote participant
+                    </a>
+                    <a class="voteO uneOptionIndex" href="voteO.php?id=<?php echo $option1?>">
+                        Vote organisateur
+                    </a>
+                    <a class="result uneOptionIndex" href="showVote.php?id=<?php echo $option1?>">
+                        Voir résultat
+                    </a>
                 </div>
                 <?php
                 }
