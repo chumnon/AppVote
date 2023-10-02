@@ -65,9 +65,9 @@ $_SESSION['vote'] = true;
 
             if($valeur === -1 || $_SERVER['REQUEST_METHOD'] != "POST"){
                 ?>
-                    <div class="container-fluid menu ">
-                        <div class="row">
-                            <h1><?php echo $lEvent['nom']?></h1>
+                    <div class="container-fluid menuVote">
+                        <div class="row voteTitreBg">
+                            <h1 class="voteTitre"><?php echo $lEvent['nom']?></h1>
                         </div>
                         <div class="row space">
                             <canvas id="monCanvas" width="300" height="100">" ></canvas>
@@ -123,9 +123,9 @@ $_SESSION['vote'] = true;
             
             context.scale(dpr, dpr);
 
-            var rouge = 155;
-            var vert = 155;
-            var bleu= 155;
+            var rouge = 97;
+            var vert = 152;
+            var bleu= 142;
             var mid = 1;
             var Ax = 125; var Ay = 65;
             var Bx = 150; var By = 65;
@@ -136,7 +136,7 @@ $_SESSION['vote'] = true;
             context.arc(150, 50, 40, 0, 2 * Math.PI);
             context.fill();
 
-            context.fillStyle="white";
+            context.fillStyle='rgb(' + 221 + ',' + 139 + ',' + 154 + ')';
             context.beginPath();
             context.arc(150, 50, 35, 0, 2 * Math.PI);
             context.fill();
@@ -178,7 +178,7 @@ $_SESSION['vote'] = true;
                     context.arc(150, 50, 40, 0, 2 * Math.PI);
                     context.fill();
 
-                    context.fillStyle="white";
+                    context.fillStyle='rgb(' + 221 + ',' + 139 + ',' + 154 + ')';
                     context.beginPath();
                     context.arc(150, 50, 35, 0, 2 * Math.PI);
                     context.fill();
@@ -206,7 +206,7 @@ $_SESSION['vote'] = true;
                     context.arc(150, 50, 40, 0, 2 * Math.PI);
                     context.fill();
 
-                    context.fillStyle="white";
+                    context.fillStyle='rgb(' + 221 + ',' + 139 + ',' + 154 + ')';
                     context.beginPath();
                     context.arc(150, 50, 35, 0, 2 * Math.PI);
                     context.fill();

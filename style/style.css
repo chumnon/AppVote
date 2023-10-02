@@ -8,38 +8,52 @@
     font-family: corn;
 }
 @font-face{
-    src:url(../fonts/Milky\ Coffee.ttf);
-    font-family: coffee;
+    src:url(../fonts/uchiyama.otf);
+    font-family:uchiyama;
 }
 
 /*GENERAL*/
 .banniere{
     text-align: center;
-    padding-top: 0.5vh;
-    height: 9.5vh;
+    padding-top: 1vh;
+    height: 12vh;
     background-color: rgba(125, 78, 87);
 }
 
 .navBarOption{
     color:rgba(245, 241, 237);
     text-decoration: none;
-    font-family: coffee;
-    font-size: large;
+    font-family: uchiyama;
     text-shadow:rgb(155,119,125) 2px 2px;
+    width: 15%;
+}
+
+@media(min-width: 0px) and (max-width: 8000px){
+    .navBarOption{
+        font-size: 15px;
+    }
+    .appLogo{
+        font-size: 50px;
+    }
+    .appLogoAlt{
+        font-size: 30px;
+    }
+}
+@media(min-width: 800px){
+    .navBarOption{
+        font-size: 20px;
+    }
+    .appLogo{
+        font-size: 70px;
+    }
+    .appLogoAlt{
+        font-size: 40px;
+    }
 }
 
 .navBarOption:hover{
     color:rgba(10, 33, 15);
     text-shadow:rgb(96,67,69) 2px 2px;
-}
-
-@media(min-width: 768px){
-    .monProfil{
-        text-align: left;
-    }
-    .changeUser{
-        text-align: right;
-    }
 }
 
 .retour{
@@ -48,16 +62,34 @@
 
 .appLogo{
     font-family: dessert;
-    font-size: 50px;
-    margin-top: -2.5vh;
     color:rgba(245, 241, 237);
     text-shadow:rgb(185,160,162) 2px 2px;
+    width: 40%;
+    margin-left: 15%;
+}
+
+.appLogoAlt{
+    font-family: dessert;
+    color:rgba(245, 241, 237);
+    text-shadow:rgb(185,160,162) 2px 2px;
+    width: 25%;
+    text-align: left;
+}
+
+.navBarTitre{
+    color: rgba(97, 152, 142);
+    font-family: corn;
+    font-size: 50px;
+    text-shadow:rgb(185,160,162) 2px 2px;
+    width: 50%;
+    margin-right: 10%;
+    padding-top: 1vh;
 }
 
 .menu{
     text-align: center;
-    background-color: rgba(241, 136, 5);
-    height: 90vh;
+    background-image: url(../img/bg_bggenerator_com.jpg);
+    height: 88vh;
 }
 
 .titre{
@@ -100,22 +132,50 @@
 }
 
 .uneOptionIndex{
-    background-color:rgb(230, 130, 9);
+    background-color:rgba(230, 131, 9, 0.726);
     border-radius: 100px;
     color:rgb(245, 241, 237);
     text-decoration: none;
-    font-family: coffee;
-    font-size: 30px;
+    font-family: uchiyama;
+    font-size: 25px;
     padding: 50px;
-    width: 30%;
 }
 
 .uneOptionIndex:hover{
-    background-color:rgb(252, 141, 6);
+    color:rgba(10, 33, 15)
+}
+.uneOptionVote{
+    width: 30%;
+    margin-left: 2.5%;
+}
+
+.uneOptionIndex:hover{
+    background-color:rgba(252, 141, 6, 0.712);
     border-radius: 100px;
 }
 
+/*PROFIL*/
+
+
+
 /*VOTE*/
+.voteTitreBg{
+    padding-top: 3vh;
+    background-color: rgba(125, 78, 87);
+}
+
+.voteTitre{
+    color: rgba(97, 152, 142);
+    font-family: corn;
+    font-size: 50px;
+}
+
+.menuVote{
+    text-align: center;
+    height: 90vh;
+    background-color: rgb(172, 109, 121);
+}
+
 .space{
     margin-top: 50px;
     margin-bottom: 100px;
@@ -132,14 +192,14 @@
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-    background: rgb(155, 154, 154);
+    background: rgba(97, 152, 142);
     height: 3rem;
     border-radius: 100px;
     
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    background: rgb(185, 185, 185);
+    background: rgb(125, 197, 184);
     height: 3rem;
     width: 3rem;
     border-radius: 100px;

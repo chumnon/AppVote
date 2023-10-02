@@ -46,14 +46,20 @@ if (isset($_SESSION["connexion"])){
             $leUser = $conn->query($monUser)->fetch_assoc();
 
             ?>
+
+            <div class="container-fluid banniere">
+                <div class="row navBar">
+                        <h1 class="appLogoAlt">M-NAV</h1>
+                        <h1 class="leUser navBarTitre"><?php echo $leUser['user']?></h1>
+                        <a class="navBarOption" href="index.php">Page principal</a>
+                </div>
+            </div>
             <div class="container-fluid menu">
                 <div class="row retour">
                     <div class="col-3 offset-md-9">
-                        <a href="index.php">Page principal</a>
                     </div>
                 </div>
                 <div class="row leUser">
-                    <h1><?php echo $leUser['user']?></h1>
                 </div>
                 <div class="row modUser">
                     <div class="col-6 offset-md-2 col-md-3">

@@ -53,21 +53,11 @@ if (isset($_SESSION["vote"] )){
             ?>
             
             <div class="container-fluid banniere">
-            <div class="row navBar">
-                    <div class="col-4 col-md-2 monProfil">
+                <div class="row navBar">
                         <a class="navBarOption" href="profil.php?id=<?php echo $leUser['id']?>">Mon profil</a>
-                    </div>
-                    <div class="offset-md-5 col-4 col-md-3 changeUser">
+                        <h1 class="appLogo">M-NAV</h1>
                         <a class="navBarOption" href="connection.php">Changer utilisateur</a>
-                    </div>
-                    <div class="col-4 col-md-2">
                         <a class="navBarOption" href="newUser.php">Nouvel utilisateur</a>
-                    </div>
-                </div>
-                <div class="row logo">
-                <div class="offset-3 col-6">
-                    <h1 class="appLogo">M-NAV</h1>
-                    </div>
                 </div>
             </div>
 
@@ -110,13 +100,13 @@ if (isset($_SESSION["vote"] )){
                     </a> 
                 </div>
                 <div class="row optionVote">
-                    <a class="voteP uneOptionIndex" href="voteP.php?id=<?php echo $option1?>">
+                    <a class="voteP uneOptionIndex uneOptionVote" href="voteP.php?id=<?php echo $option1?>">
                         Vote participant
                     </a>
-                    <a class="voteO uneOptionIndex" href="voteO.php?id=<?php echo $option1?>">
+                    <a class="voteO uneOptionIndex uneOptionVote" href="voteO.php?id=<?php echo $option1?>">
                         Vote organisateur
                     </a>
-                    <a class="result uneOptionIndex" href="showVote.php?id=<?php echo $option1?>">
+                    <a class="result uneOptionIndex uneOptionVote" href="showVote.php?id=<?php echo $option1?>">
                         Voir résultat
                     </a>
                 </div>
