@@ -13,7 +13,7 @@ $_SESSION['vote'] = true;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Évènements</title>
+    <title>Vote participant</title>
 
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -25,8 +25,13 @@ $_SESSION['vote'] = true;
         if($_SESSION["connexion"] != true){
             $_SESSION["connexion"] = false;
             ?>
-            <h1>Vous n'êtes pas connecté</h1>
-            <a href="connection.php">Page de connection</a>
+            <div class='container-fluid menuConnexion'>
+                <div class='row blockCon'>
+                    <h1 class='titleCon'>Vous n'êtes pas connecté</h1>
+                    <div class='offset-3 col-6'>
+                    <a href="connexion.php" class='linkCon'>Page de connexion</a>
+                </div>
+            </div>
             <?php
         } else {
             $servername = "localhost";
@@ -34,12 +39,12 @@ $_SESSION['vote'] = true;
             $password = "root";
             $db = "appvote";
     
-            //Connection
+            //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
     
             //Verrification
             if ($conn ->connect_error){
-                die("Erreur de connection: " . $conn->connect_error);
+                die("Erreur de connexion: " . $conn->connect_error);
             }
 
             if (isset($_GET['id'])){

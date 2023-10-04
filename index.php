@@ -27,8 +27,13 @@ if (isset($_SESSION["vote"] )){
         $_SESSION["vote"] = false;
         $_SESSION["connexion"] = false;
         ?>
-        <h1>Vous n'êtes pas connecté</h1>
-        <a href="connection.php">Page de connection</a>
+        <div class='container-fluid menuConnexion'>
+            <div class='row blockCon'>
+                <h1 class='titleCon'>Vous n'êtes pas connecté</h1>
+                <div class='offset-3 col-6'>
+                <a href="connexion.php" class='linkCon'>Page de connexion</a>
+            </div>
+        </div>
         <?php
     } else {
         $servername = "localhost";
@@ -36,12 +41,12 @@ if (isset($_SESSION["vote"] )){
             $password = "root";
             $db = "appvote";
 
-            //Connection
+            //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
 
             //Verrification
             if ($conn ->connect_error){
-                die("Erreur de connection: " . $conn->connect_error);
+                die("Erreur de connexion: " . $conn->connect_error);
             }
 
             $conn->query('SET NAMES utf8');
@@ -56,7 +61,7 @@ if (isset($_SESSION["vote"] )){
                 <div class="row navBar">
                         <a class="navBarOption" href="profil.php?id=<?php echo $leUser['id']?>">Mon profil</a>
                         <h1 class="appLogo">M-NAV</h1>
-                        <a class="navBarOption" href="connection.php">Changer utilisateur</a>
+                        <a class="navBarOption" href="connexion.php">Changer utilisateur</a>
                         <a class="navBarOption" href="newUser.php">Nouvel utilisateur</a>
                 </div>
             </div>

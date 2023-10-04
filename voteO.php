@@ -25,8 +25,13 @@ $_SESSION['vote'] = true;
         if($_SESSION["connexion"] != true){
             $_SESSION["connexion"] = false;
             ?>
-            <h1>Vous n'êtes pas connecté</h1>
-            <a href="connection.php">Page de connection</a>
+            <div class='container-fluid menuConnexion'>
+                <div class='row blockCon'>
+                    <h1 class='titleCon'>Vous n'êtes pas connecté</h1>
+                    <div class='offset-3 col-6'>
+                    <a href="connexion.php" class='linkCon'>Page de connexion</a>
+                </div>
+            </div>
             <?php
         } else {
             $servername = "localhost";
@@ -34,12 +39,12 @@ $_SESSION['vote'] = true;
             $password = "root";
             $db = "appvote";
     
-            //Connection
+            //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
     
             //Verrification
             if ($conn ->connect_error){
-                die("Erreur de connection: " . $conn->connect_error);
+                die("Erreur de connexion: " . $conn->connect_error);
             }
 
             if (isset($_GET['id'])){

@@ -17,14 +17,15 @@
     text-align: center;
     padding-top: 1vh;
     height: 12vh;
-    background-color: rgba(125, 78, 87);
+    background-color: rgb(163, 136, 0);
+    border-bottom: 2px double rgba(206, 155, 1, 0.5);
 }
 
 .navBarOption{
-    color:rgba(245, 241, 237);
+    color:rgb(46, 80, 119);
     text-decoration: none;
     font-family: uchiyama;
-    text-shadow:rgb(155,119,125) 2px 2px;
+    text-shadow:rgb(105,108,60) 2px 2px;
     width: 15%;
 }
 
@@ -52,8 +53,8 @@
 }
 
 .navBarOption:hover{
-    color:rgba(10, 33, 15);
-    text-shadow:rgb(96,67,69) 2px 2px;
+    color:rgba(69, 13, 52);
+    text-shadow:rgb(116,75,26) 2px 2px;
 }
 
 .retour{
@@ -62,25 +63,25 @@
 
 .appLogo{
     font-family: dessert;
-    color:rgba(245, 241, 237);
-    text-shadow:rgb(185,160,162) 2px 2px;
+    color:rgb(46, 80, 119);
+    text-shadow:rgb(105,108,60) 2px 2px;
     width: 40%;
     margin-left: 15%;
 }
 
 .appLogoAlt{
     font-family: dessert;
-    color:rgba(245, 241, 237);
-    text-shadow:rgb(185,160,162) 2px 2px;
+    color:rgb(46, 80, 119);
+    text-shadow:rgb(105,108,60) 2px 2px;
     width: 25%;
     text-align: left;
 }
 
 .navBarTitre{
-    color: rgba(97, 152, 142);
+    color: rgba(138, 5, 23);
     font-family: corn;
     font-size: 50px;
-    text-shadow:rgb(185,160,162) 2px 2px;
+    text-shadow:rgb(151,71,12) 2px 2px;
     width: 50%;
     margin-right: 10%;
     padding-top: 1vh;
@@ -88,12 +89,13 @@
 
 .menu{
     text-align: center;
-    background-image: url(../img/bg_bggenerator_com.jpg);
+    background-image: url(../img/dataSmileyBG.png);
     height: 88vh;
+    background-size:cover;
 }
 
 .titre{
-    color: rgba(97, 152, 142);
+    color: rgba(46, 80, 119);
     font-family: corn;
     font-size: 50px;
     padding-top: 5vh;
@@ -102,20 +104,20 @@
 /*INDEX*/
 
 .choixEvent{
-    width: 100%;
+    width: 75%;
     text-align: center;
     border-radius: 180px;
-    border-color: rgba(97, 152, 142);
-    background-color: rgb(117, 180, 169);
-    color: rgba(10, 33, 15);
+    border-color: rgba(34, 59, 88);
+    background-color: rgb(51, 89, 132);
+    color: rgba(205, 87, 19);
     font-weight: bolder;
-    border-bottom: 2px black;
+    font-size:20px;
 }
 
 .unOptionEvent{
     color: rgba(10, 33, 15);
     font-weight: bold;
-    border-bottom: 2px black solid;
+    text-align: center;
 }
 .unOptionEvent:checked{
     background-color: rgba(97, 152, 142);
@@ -132,9 +134,9 @@
 }
 
 .uneOptionIndex{
-    background-color:rgba(230, 131, 9, 0.726);
+    background-color:rgba(205, 87, 19, 0.726);
     border-radius: 100px;
-    color:rgb(245, 241, 237);
+    color:rgb(69, 13, 52);
     text-decoration: none;
     font-family: uchiyama;
     font-size: 25px;
@@ -220,3 +222,48 @@ input[type="range"]:focus::-webkit-slider-thumb {
     border: none;
     outline: none;
   }
+
+/*CONNEXION*/
+.menuConnexion{
+    text-align: center;
+    background-image: url(../img/graySmileyBG.png);
+    background-size:cover;
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.blockCon{
+    text-align: left;
+    background-size:cover;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(161, 161, 161, 0.692);
+    padding: 70px;
+    padding-left: 150px;
+    padding-right: 150px;
+    border-radius: 40px;
+}
+
+.titleCon{
+    color: rgb(51, 10, 39);
+    text-shadow: rgb(92,50,79) -1px 1px;
+}
+
+.linkCon{
+    text-align: center;
+    font-size: 20px;
+    color:rgb(92,50,79);
+    text-decoration: none;
+    background-color: rgba(138,124,134, 0.671);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.linkCon:hover{
+    color: rgb(51, 10, 39);
+    background-color: rgb(138, 124, 134);
+}

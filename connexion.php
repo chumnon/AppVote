@@ -12,7 +12,7 @@ if (isset($_SESSION["vote"] )){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connection</title>
+    <title>Connexion</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="style/style.css" rel="stylesheet">
@@ -24,12 +24,12 @@ if (isset($_SESSION["vote"] )){
             $password = "root";
             $db = "appvote";
 
-            //Connection
+            //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
 
             //Verrification
             if ($conn ->connect_error){
-                die("Erreur de connection: " . $conn->connect_error);
+                die("Erreur de connexion: " . $conn->connect_error);
             }
 
             $conn->query('SET NAMES utf8');
@@ -72,19 +72,21 @@ if (isset($_SESSION["vote"] )){
                     }
                 }
             }
-
+            
             if ($_SERVER['REQUEST_METHOD'] != "POST" || $erreur == true){
                 ?>
-                <div class="container-fluid" style="text-align:center">
-                    <h1>Connection</h1>
-                    <div class="row" style="text-align:left">
-                        <div class="offset-md-5 ">
+                <div class="container-fluid menuConnexion">
+                    <div class="row blockCon">
+                        <div class="bgBlock titleCon">
+                            <h1>Connexion</h1>
+                        </div>
+                        <div class="inInfo bgBlock">
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                                 Utilisateur : </br> <input type="text" name="user" maxLength="40" value="<?php echo $user;?>"><br>
                                 <p style="color:red;"><?php echo $userErreur; ?></p>
                                 Mots de passe : </br> <input type="password" name="mdp" maxLength="25"><br>
                                 <p style="color:red;"><?php echo $mdpErreur; ?></p>
-                                <input type="submit">
+                                <input type="submit" value="se connecter">
                             </form>
                         </div>
                     </div>
