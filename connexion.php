@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 $_SESSION["connexion"] = false;
@@ -22,7 +23,7 @@ if (isset($_SESSION["vote"] )){
             $servername = "localhost";
             $username = "root";
             $password = "root";
-            $db = "appvote";
+            $db = "m-nav";
 
             //Connexion
             $conn = new mysqli($servername, $username,$password,$db);

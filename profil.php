@@ -6,6 +6,7 @@ if (isset($_SESSION["connexion"])){
 };
 ?>
 
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +36,7 @@ if (isset($_SESSION["connexion"])){
             $servername = "localhost";
                 $username = "root";
                 $password = "root";
-                $db = "appvote";
+                $db = "m-nav";
     
                 //Connexion
                 $conn = new mysqli($servername, $username,$password,$db);
@@ -64,8 +65,8 @@ if (isset($_SESSION["connexion"])){
 
             <div class="container-fluid menuInfo">
                 <div class="row modUser">
-                        <a href="modUser.php" class="col-6 offset-md-2 col-md-4 uneOptionProfil">modifier le compte</a>
-                        <a href="supUser.php?id=<?php echo $leUser['id']?>" class="col-6 col-md-4  uneOptionProfil">supprimer le compte</a>
+                    <a href="modUser.php" class="col-6 offset-md-2 col-md-4 uneOptionProfil">modifier le compte</a>
+                    <a href="supUser.php?id=<?php echo $leUser['id']?>" class="col-6 col-md-4  uneOptionProfil">supprimer le compte</a>
                 </div>
 
                 <div class="row selectEvent">

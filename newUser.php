@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 if (isset($_SESSION["connexion"])){
@@ -35,7 +36,7 @@ if (isset($_SESSION["connexion"])){
         $servername = "localhost";
             $username = "root";
             $password = "root";
-            $db = "appvote";
+            $db = "m-nav";
 
             //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
@@ -92,23 +93,25 @@ if (isset($_SESSION["connexion"])){
 
             if ($_SERVER['REQUEST_METHOD'] != "POST" || $erreur == true){
                 ?>
-                <div class="container-fluid" style="text-align:center">
-                    <div class="row retour">
-                        <div class="col-3 offset-md-9">
-                            <a href="index.php">Page principal</a>
-                        </div>
+                <div class="container-fluid banniere banniereMod">
+                    <div class="row navBar navBarMod">
+                            <h1 class="appLogoAlt appLogoAltMod">M-NAV</h1>
+                            <h1 class="navBarTitre navBarTitreMod">Création utilisateur</h1>
+                            <a class="navBarOption navBarOptionMod" href="index.php">Page principal</a>
                     </div>
-                    <h1>Création utilisateur</h1>
+                </div>
+
+                <div class="container-fluid menuMod">
                     <div class="row" style="text-align:left">
-                        <div class="offset-md-5 ">
+                        <div class="offset-md-5 boxNew">
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                                Utilisateur : </br> <input type="text" name="user" maxLength="40" value="<?php echo $user;?>"><br>
+                                <p class="catNew">Utilisateur :</p> <input type="text" name="user" maxLength="40" value="<?php echo $user;?>" class="inputNew"><br>
                                 <p style="color:red;"><?php echo $userErreur; ?></p>
-                                Mots de passe : </br> <input type="password" name="mdp" maxLength="25"><br>
+                                <p class="catNew">Mots de passe : </p><input type="password" name="mdp" maxLength="25" class="inputNew"><br>
                                 <p style="color:red;"><?php echo $mdpErreur; ?></p>
-                                Confirmation : </br> <input type="password" name="cmdp" maxLength="25"><br>
+                                <p class="catNew">Confirmation : </p> <input type="password" name="cmdp" maxLength="25" class="inputNew"><br>
                                 <p style="color:red;"><?php echo $cmdpErreur; ?></p>
-                                <input type="submit">
+                                <input type="submit" class="btnNew" value='Confirmer'>
                             </form>
                         </div>
                     </div>

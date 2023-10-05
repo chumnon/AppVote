@@ -1,9 +1,10 @@
+--Un projet d'Arthur Lamothe, M-NAV--
 -- phpMyAdmin SQL Dump
 -- version 4.5.4.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 02 Octobre 2023 à 13:50
+-- Généré le :  Jeu 05 Octobre 2023 à 15:40
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -17,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `appvote`
+-- Base de données :  `M-NAV`
 --
 
 -- --------------------------------------------------------
@@ -37,15 +38,6 @@ CREATE TABLE `evenement` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
 
---
--- Contenu de la table `evenement`
---
-
-INSERT INTO `evenement` (`nom`, `date`, `lieu`, `departement`, `description`, `avisParticipant`, `avisOrganisateur`, `id`) VALUES
-('BIDON2', '2023-09-27', 'BIDON2', 'BIDON2', 'BIDON2', '0', '59.20', 2),
-('BIDON', '2023-09-03', 'X', 'X', 'X', '48.33', '50.00', 7),
-('BIDON3', '2023-10-16', 'X', 'X', 'X', '50.00', '0', 8);
-
 -- --------------------------------------------------------
 
 --
@@ -56,17 +48,6 @@ CREATE TABLE `gestion` (
   `user` int(11) NOT NULL,
   `evenement` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
-
---
--- Contenu de la table `gestion`
---
-
-INSERT INTO `gestion` (`user`, `evenement`) VALUES
-(1, 2),
-(7, 2),
-(1, 7),
-(8, 7),
-(1, 8);
 
 -- --------------------------------------------------------
 
@@ -85,9 +66,7 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`user`, `mdp`, `id`) VALUES
-('chumnon', '18850153f825f7c2f7408b1a79c88dcf221ae1b7', 1),
-('BIDON', '664c2019f9fdad00b3fa0ace08d341b411beca2f', 7),
-('BIDON2', '1505a5b7a9e06544031ee699910ed77d389fa21a', 8);
+('chumnon', 'b106d16736b6adf04c8e7b1616c9c796f209cbd6', 1);
 
 -- --------------------------------------------------------
 
@@ -101,26 +80,6 @@ CREATE TABLE `vote` (
   `participant` tinyint(1) NOT NULL,
   `evenementID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
-
---
--- Contenu de la table `vote`
---
-
-INSERT INTO `vote` (`id`, `avis`, `participant`, `evenementID`) VALUES
-(5, '100', 1, 8),
-(6, '0', 1, 8),
-(7, '50', 1, 8),
-(8, '100', 0, 2),
-(9, '0', 0, 2),
-(10, '50', 0, 2),
-(11, '71', 0, 2),
-(12, '75', 0, 2),
-(13, '100', 1, 7),
-(14, '0', 1, 7),
-(15, '45', 1, 7),
-(16, '100', 0, 7),
-(17, '0', 0, 7),
-(18, '85', 1, 2);
 
 --
 -- Index pour les tables exportées
@@ -160,17 +119,17 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --

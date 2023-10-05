@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 if (isset($_SESSION["connexion"])){
@@ -35,7 +36,7 @@ if (isset($_SESSION["connexion"])){
         $servername = "localhost";
             $username = "root";
             $password = "root";
-            $db = "appvote";
+            $db = "m-nav";
 
             //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
@@ -109,11 +110,11 @@ if (isset($_SESSION["connexion"])){
                     <div class="row" style="text-align:left">
                         <div class="boxModUser">
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                                <p class="catUserMod">Utilisateur : </p> <input type="text" name="user" maxLength="40" value="<?php echo $leUser["user"];?>"><br>
+                                <p class="catUserMod">Utilisateur : </p> <input type="text" name="user" class="inputUserMod" maxLength="40" value="<?php echo $leUser["user"];?>"><br>
                                 <p style="color:red;"><?php echo $userErreur; ?></p>
-                                <p class="catUserMod">Mots de passe : </p> <input type="password" name="mdp" maxLength="25"><br>
+                                <p class="catUserMod">Mots de passe : </p> <input type="password" name="mdp" class="inputUserMod" maxLength="25"><br>
                                 <p style="color:red;"><?php echo $mdpErreur; ?></p>
-                                <p class="catUserMod">Confirmation : </p> <input type="password" name="cmdp" maxLength="25"><br>
+                                <p class="catUserMod">Confirmation : </p> <input type="password" name="cmdp" class="inputUserMod" maxLength="25"><br>
                                 <p style="color:red;"><?php echo $cmdpErreur; ?></p>
                                 <div class="boxBtn">
                                     <input type="submit" value="modifer" class="btnModUser">
@@ -128,10 +129,12 @@ if (isset($_SESSION["connexion"])){
             $update = "UPDATE utilisateur SET user = '" . $user . "', mdp = '" . $mdpCode ."' WHERE id = " . $leUser['id'];
             if ($conn->query($update) === TRUE) {
                 ?>
-                <div class="container-fluid" style="text-align:center">
-                    <h1>Utilisateur modifier</h1>
-                    <a href="profil.php?id=<?php echo $leUser['id']?>">profil</a> 
+                <div class="container-fluid menuSup">
+                    <div class="row blockSup">
+                        <h1 class="titreCon">Utilisateur modifier</h1>
+                        <a href="profil.php?id=<?php echo $leUser['id']?>" class="linkCon">profil</a> 
                     </div>
+                </div>
                 <?php
             } else {
                 ?>

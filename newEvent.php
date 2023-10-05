@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 if (isset($_SESSION["connexion"])){
@@ -35,7 +36,7 @@ if (isset($_SESSION["connexion"])){
         $servername = "localhost";
             $username = "root";
             $password = "root";
-            $db = "appvote";
+            $db = "m-nav";
 
             //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
@@ -96,27 +97,29 @@ if (isset($_SESSION["connexion"])){
 
             if ($_SERVER['REQUEST_METHOD'] != "POST" || $erreur == true){
                 ?>
-                <div class="container-fluid" style="text-align:center">
-                    <div class="row retour">
-                        <div class="col-3 offset-md-9">
-                            <a href="index.php">Page principal</a>
-                        </div>
+                <div class="container-fluid banniere banniereMod">
+                    <div class="row navBar navBarMod">
+                            <h1 class="appLogoAlt appLogoAltMod">M-NAV</h1>
+                            <h1 class="navBarTitre navBarTitreMod">Création Évènement</h1>
+                            <a class="navBarOption navBarOptionMod" href="index.php">Page principal</a>
                     </div>
-                    <h1>Création Évènement</h1>
+                </div>
+
+                <div class="container-fluid menuMod" style="text-align:center">
                     <div class="row" style="text-align:left">
-                        <div class="offset-md-5 ">
+                        <div class="offset-md-5 boxNew">
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                                Nom : </br> <input type="text" name="nom" maxLength="64" value="<?php echo $nom;?>"><br>
+                                <p class="catNew">Nom :</p> <input type="text" name="nom" maxLength="64" value="<?php echo $nom;?>" class="inputNew"><br>
                                 <p style="color:red;"><?php echo $nomErreur; ?></p>
-                                Date : </br> <input type="date" name="date" value="<?php echo $date;?>"><br>
+                                <p class="catNew">Date : </p> <input type="date" name="date" value="<?php echo $date;?>" class="inputNew"><br>
                                 <p style="color:red;"><?php echo $dateErreur; ?></p>
-                                Lieu : </br> <input type="text" name="lieu" maxLength="128" value="<?php echo $lieu;?>"><br>
+                                <p class="catNew">Lieu :</p> <input type="text" name="lieu" maxLength="128" value="<?php echo $lieu;?>" class="inputNew"><br>
                                 <p style="color:red;"><?php echo $lieuErreur; ?></p>
-                                Departement : </br> <input type="text" name="departement" maxLength="64" value="<?php echo $departement;?>"><br>
+                                <p class="catNew">Departement : </p> <input type="text" name="departement" maxLength="64" value="<?php echo $departement;?>" class="inputNew"><br>
                                 <p style="color:red;"><?php echo $departementErreur; ?></p>
-                                Description : </br> <input type="text" name="description" maxLength="255" value="<?php echo $description;?>"><br>
+                                <p class="catNew">Description : </p> <input type="text" name="description" maxLength="255" value="<?php echo $description;?>" class="inputNew"><br>
                                 <p style="color:red;"><?php echo $descriptionErreur; ?></p>
-                                <input type="submit">
+                                <input type="submit" class="btnNew" value='Confirmer'>
                             </form>
                         </div>
                     </div>

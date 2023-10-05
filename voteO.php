@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 if (isset($_SESSION["connexion"])){
@@ -37,7 +38,7 @@ $_SESSION['vote'] = true;
             $servername = "localhost";
             $username = "root";
             $password = "root";
-            $db = "appvote";
+            $db = "m-nav";
     
             //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
@@ -70,9 +71,10 @@ $_SESSION['vote'] = true;
 
             if($valeur === -1 || $_SERVER['REQUEST_METHOD'] != "POST"){
                 ?>
-                    <div class="container-fluid menu ">
-                        <div class="row ">
-                            <h1 class="titre"><?php echo $lEvent['nom']?></h1>
+                    <div class="container-fluid menuVote ">
+                        <div class="row voteTitreBg">
+                            <h1 class="logoVote">M-NAV</h1>
+                            <h1 class="voteTitre"><?php echo $lEvent['nom']?></h1>
                         </div>
                         <div class="row space">
                             <canvas id="monCanvas" width="300" height="100">" ></canvas>
@@ -83,26 +85,37 @@ $_SESSION['vote'] = true;
                                 <input type="hidden" class="valeur" name="valeur" value="-1">
                             </div>
                             <div class="row">
-                                <input type="hidden" name="vote" class="bouton">
+                                <input type="hidden" name="vote" class="bouton btnVote" value="VOTER">
                                 <input type="hidden" name="id" value="<?php echo $id;?>">
+                            </div>
                         </form>
-                        </div>
+                    </div>
                     <?php
             } else {
                 $envoye = "INSERT INTO vote (avis, participant, evenementID) VALUES ('" . $valeur . "', 0, '" . $id . "');";
             if ($conn->query($envoye) === TRUE) {
                 ?>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                        <input type="hidden" class="valeur" name="valeur" value="-1">
-                        <input type="hidden" name="id" value="<?php echo $id;?>">
-                    </form>
-                    <div class="container-fluid menu ">
+                     <div class="container-fluid menuVote">
+                        <div class="row voteTitreBg">
+                            <h1 class="logoVote">M-NAV</h1>
+                            <h1 class="voteTitre"><?php echo $lEvent['nom']?></h1>
+                        </div>
+                        <div class="row space">
+                            <canvas id="monCanvas" width="300" height="100">" ></canvas>
+                        </div>
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                            <div class="row rangeRow">
+                                <input type="hidden" class="valeur" name="valeur" value="-1">
+                            </div>
+                        </form>
                         <div class="row">
-                            <h1>Merci!</h1>
+                            <h1 class="merci">Merci!</h1>
                         </div>
                     </div>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                        <input type="hidden" name="id" value="<?php echo $id;?>">
+                    </form>
                 <?php
-
                 $page = $_SERVER['PHP_SELF'];
                 $sec = "2";
                 header("Refresh: $sec; url=$page?id=" . $id);
@@ -128,10 +141,10 @@ $_SESSION['vote'] = true;
             canvas.height = 100 * dpr;
             
             context.scale(dpr, dpr);
-
-            var rouge = 155;
-            var vert = 155;
-            var bleu= 155;
+            
+            var rouge = 90;
+            var vert = 60;
+            var bleu= 196;
             var mid = 1;
             var Ax = 125; var Ay = 65;
             var Bx = 150; var By = 65;
@@ -142,7 +155,7 @@ $_SESSION['vote'] = true;
             context.arc(150, 50, 40, 0, 2 * Math.PI);
             context.fill();
 
-            context.fillStyle="white";
+            context.fillStyle='rgb(' + 168 + ',' + 168 + ',' + 168 + ')';
             context.beginPath();
             context.arc(150, 50, 35, 0, 2 * Math.PI);
             context.fill();
@@ -184,7 +197,7 @@ $_SESSION['vote'] = true;
                     context.arc(150, 50, 40, 0, 2 * Math.PI);
                     context.fill();
 
-                    context.fillStyle="white";
+                    context.fillStyle='rgb(' + 168 + ',' + 168 + ',' + 168 + ')';;
                     context.beginPath();
                     context.arc(150, 50, 35, 0, 2 * Math.PI);
                     context.fill();
@@ -212,7 +225,7 @@ $_SESSION['vote'] = true;
                     context.arc(150, 50, 40, 0, 2 * Math.PI);
                     context.fill();
 
-                    context.fillStyle="white";
+                    context.fillStyle='rgb(' + 168 + ',' + 168 + ',' + 168 + ')';;
                     context.beginPath();
                     context.arc(150, 50, 35, 0, 2 * Math.PI);
                     context.fill();
@@ -233,8 +246,6 @@ $_SESSION['vote'] = true;
                     context.lineWidth = 4;
                     context.stroke();
                 }
-                
-               
             });
         });
         

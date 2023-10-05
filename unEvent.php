@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 if (isset($_SESSION["connexion"])){
@@ -35,7 +36,7 @@ if (isset($_SESSION["connexion"])){
             $servername = "localhost";
                 $username = "root";
                 $password = "root";
-                $db = "appvote";
+                $db = "m-nav";
     
                 //Connexion
                 $conn = new mysqli($servername, $username,$password,$db);
@@ -61,37 +62,39 @@ if (isset($_SESSION["connexion"])){
             $lEvent = $conn->query($monEvent)->fetch_assoc();
 
             ?>
-            <div class="container-fluid menu">
-                <div class="row retour">
-                    <div class="col-3 offset-md-9">
-                        <a href="index.php">Page principal</a>
-                    </div>
+            <div class="container-fluid banniere banniereInfo">
+                <div class="row navBar navBarInfo">
+                        <h1 class="appLogoAlt appLogoAltInfo">M-NAV</h1>
+                        <h1 class="leUser navBarTitre navBarTitreInfo"><?php echo $lEvent['nom']?></h1>
+                        <a class="navBarOption navBarOptionInfo" href="index.php">Page principal</a>
                 </div>
-                <div class="row lEvent">
-                    <h1><?php echo $lEvent['nom']?></h1>
+            </div>
+
+            <div class="container-fluid menuInfo">
+                <div class="row boxInfoEvent">
+                    <p class="catEventInfo">Date: <a class="eventInfo"><?php echo $lEvent['date']?></a></p>
                 </div>
-                <div class="row">
-                    <p>Date: <?php echo $lEvent['date']?></p>
+                <div class="row boxInfoEvent">
+                    <p class="catEventInfo">Lieu: <a class="eventInfo"><?php echo $lEvent['lieu']?></a></p>
                 </div>
-                <div class="row">
-                    <p>Lieu: <?php echo $lEvent['lieu']?></p>
+                <div class="row boxInfoEvent">
+                    <p class="catEventInfo">Departement: <a class="eventInfo"><?php echo $lEvent['departement']?></a></p>
                 </div>
-                <div class="row">
-                    <p>Departement: <?php echo $lEvent['departement']?></p>
+                <div class="row boxInfoEvent">
+                    <p class="catEventInfo">Description: </p>
                 </div>
-                <div class="row">
-                    <p>Description: </p> </br>
-                    <p><?php echo $lEvent['description']?></p>
+                <div class="row boxInfoEventAlt">
+                    <a class="eventDescription"><?php echo $lEvent['description']?></a>
                 </div>
 
-                <div class="row gerant">
+                <div class="row">
                     <div class= "offset-md-2 col-md-8" >
-                        <h2>Les gestionnaire:</h2>
-                        <p>
+                        <h2 class= "titreInfo">Les gestionnaire:</h2>
+                        <p class= "unUser">--
                         <?php
                         if ($result-> num_rows > 0){
                             while($row = $result->fetch_assoc()){
-                                echo $row["user"]  ?> <?php
+                                echo "~" . $row["user"] . "~" ?> <?php
                             }
                         } else {
                             ?>
@@ -99,15 +102,13 @@ if (isset($_SESSION["connexion"])){
                             <?php
                         }
                         ?>
-                        </p>
+                        --</p>
                     </div>
                 </div>
 
-                <div class="row">
-                    <a href="modEvent.php?id=<?php echo $lEvent["id"]?>">modifier l'évènement</a>
-                </div>
-                <div class="row">
-                    <a href="supEvent.php?id=<?php echo $lEvent["id"]?>">supprimer l'évènement</a>
+                <div class="row modEvent">
+                    <a href="modEvent.php?id=<?php echo $lEvent["id"]?>" class="uneOptionEvent">modifier l'évènement</a>
+                    <a href="supEvent.php?id=<?php echo $lEvent["id"]?>" class="uneOptionEvent">supprimer l'évènement</a>
                 </div>
             </div>
         <?php       

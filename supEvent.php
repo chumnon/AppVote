@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 if (isset($_SESSION["connexion"])){
@@ -35,7 +36,7 @@ if (isset($_SESSION["connexion"])){
             $servername = "localhost";
                 $username = "root";
                 $password = "root";
-                $db = "appvote";
+                $db = "m-nav";
     
                 //Connexion
                 $conn = new mysqli($servername, $username,$password,$db);
@@ -51,7 +52,7 @@ if (isset($_SESSION["connexion"])){
                 $id = $_POST['id'];
             } else {
                     $id = -1;
-                    echo "Erreur lors du chargement de la page"
+                    echo "Erreur lors du chargement de la page";
                     $erreur = true;
             }
 
@@ -61,25 +62,21 @@ if (isset($_SESSION["connexion"])){
 
             
             if ($_SERVER['REQUEST_METHOD'] != "POST"){
-                ECHO $lEvent["id"];
             ?>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-            <div class="container-fluid menu">
-                <div class="row warning">
-                    <h1>ATTENTION, VOUS ÊTES SUR LE POINT DE SUPPRIMER L'ÉVÈNEMENT SUIVANT:</h1>
-                    <h1><?php echo $lEvent['nom']?></h1>
-                    <h1>ÊTES-VOUS SÛR DE VOULOIR LE SUPPRIMER?</h1>
-                </div>
-                <div class="row confirm">
-                    <div class="col-6 offset-md-2 col-md-3">
+            <div class="container-fluid menuSup">
+                <div class="row blockSup">
+                    <h1 class="warningSup">ATTENTION, VOUS ÊTES SUR LE POINT DE SUPPRIMER L'ÉVÈNEMENT SUIVANT:</h1>
+                    <h1 class="titreSup"><?php echo $lEvent['nom']?></h1>
+                    <h1 class="warningSup">ÊTES-VOUS SÛR DE VOULOIR LE SUPPRIMER?</h1>
+                    </br>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                        <input type="submit" value="oui">
+                        <div class="row blockBtnSup">
+                            <a href="unEvent.php?id=<?php echo $lEvent['id']?>" class="btnNonSup">non</a>
+                            <input type="submit" value="oui" class="btnSup">
+                        </div>
                         <input type="hidden" name="id" value="<?php echo $id;?>">
                     <form>
-                    </div>
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <a href="unEvent.php?id=<?php echo $lEvent['id']?>">non</a>
-                    </div>
                 </div>
             </div>
             </form>

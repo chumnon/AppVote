@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 if (isset($_SESSION["connexion"])){
@@ -36,7 +37,7 @@ if (isset($_SESSION["connexion"])){
         $servername = "localhost";
             $username = "root";
             $password = "root";
-            $db = "appvote";
+            $db = "m-nav";
 
             //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
@@ -148,7 +149,7 @@ if (isset($_SESSION["connexion"])){
                 <div class="offset-md-2 col-md-4">
                     <div class="row" style="text-align:left">
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                                    <p class='catEventMod'>Nom :</p> <input type="text" name="nom" maxLength="64" value="<?php echo $nom;?>"><br>
+                                    <p class='catEventMod'>Nom :</p> <input type="text" name="nom" maxLength="64" value="<?php echo $nom;?> "><br>
                                     <p style="color:red;"><?php echo $nomErreur; ?></p>
                                     <p class='catEventMod'>Date :</p> <input type="date" name="date" value="<?php echo $date;?>"><br>
                                     <p style="color:red;"><?php echo $dateErreur; ?></p>

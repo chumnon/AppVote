@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 if (isset($_SESSION["connexion"])){
@@ -35,7 +36,7 @@ if (isset($_SESSION["connexion"])){
             $servername = "localhost";
                 $username = "root";
                 $password = "root";
-                $db = "appvote";
+                $db = "m-nav";
     
                 //Connexion
                 $conn = new mysqli($servername, $username,$password,$db);
@@ -98,37 +99,25 @@ if (isset($_SESSION["connexion"])){
             }
 
             ?>
-            <div class="container-fluid menu">
-                <div class="row retour">
-                    <div class="col-3 offset-md-9">
-                        <a href="index.php">Page principal</a>
-                    </div>
+            <div class="container-fluid banniere banniereInfo">
+                <div class="row navBar navBarInfo">
+                        <h1 class="appLogoAlt appLogoAltInfo">M-NAV</h1>
+                        <h1 class="leUser navBarTitre navBarTitreInfo"><?php echo $lEvent['nom']?></h1>
+                        <a class="navBarOption navBarOptionInfo" href="index.php">Page principal</a>
                 </div>
-                <div class="row lEvent">
-                    <h1><?php echo $lEvent['nom']?></h1>
-                </div>
-                <div class="row">
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <p>Vote des participants</p>
+            </div>
+
+            <div class="container-fluid menuInfo">
+                <div class="row ">
+                    <div class="col-6 offset-md-2 col-md-3 blockResult">
+                        <p class="titreResult">Satisfaction des participants</p>
+                        <p class="infoResult"><?php echo $lEvent['avisParticipant']; ?>%</p>
+                        <p class="infoResult"><?php echo $compteurP; ?> votes</p>
                     </div>
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <p>Vote des organisateurs</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <p><?php echo $lEvent['avisParticipant']; ?>%</p>
-                    </div>
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <p><?php echo $lEvent['avisOrganisateur']; ?>%</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <p><?php echo $compteurP; ?> votes</p>
-                    </div>
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <p><?php echo $compteurO; ?> votes</p>
+                    <div class="col-6 offset-md-2 col-md-3 blockResult">
+                        <p class="titreResult">Satisfaction des organisateurs</p>
+                        <p class="infoResult"><?php echo $lEvent['avisOrganisateur']; ?>%</p>
+                        <p class="infoResult"><?php echo $compteurO; ?> votes</p>
                     </div>
                 </div>
             </div>

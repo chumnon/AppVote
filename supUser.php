@@ -1,3 +1,4 @@
+<!--Un projet d'Arthur Lamothe, M-NAV-->
 <?php 
 session_start();
 if (isset($_SESSION["connexion"])){
@@ -35,7 +36,7 @@ if (isset($_SESSION["connexion"])){
         $servername = "localhost";
             $username = "root";
             $password = "root";
-            $db = "appvote";
+            $db = "m-nav";
 
             //Connexion
             $conn = new mysqli($servername, $username,$password,$db);
@@ -54,19 +55,19 @@ if (isset($_SESSION["connexion"])){
             if ($_SERVER['REQUEST_METHOD'] != "POST"){
             ?>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-            <div class="container-fluid menu">
-                <div class="row warning">
-                    <h1>ATTENTION, VOUS ÊTES SUR LE POINT DE SUPPRIMER LE COMPTE SUIVANT:</h1>
-                    <h1><?php echo $leUser['user']?></h1>
-                    <h1>ÊTES-VOUS SÛR DE VOULOIR LE SUPPRIMER?</h1>
-                </div>
-                <div class="row confirm">
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <input type="submit" value="oui">
-                    </div>
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <a href="profil.php?id=<?php echo $leUser['id']?>">non</a>
-                    </div>
+            <div class="container-fluid menuSup">
+                <div class="row blockSup">
+                    <h1 class="warningSup">ATTENTION, VOUS ÊTES SUR LE POINT DE SUPPRIMER LE COMPTE SUIVANT:</h1>
+                    <h1 class="titreSup"><?php echo $leUser['user']?></h1>
+                    <h1 class="warningSup">ÊTES-VOUS SÛR DE VOULOIR LE SUPPRIMER?</h1>
+                    </br>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                        <div class="row blockBtnSup">
+                            <a href="profil.php?id=<?php echo $leUser['id']?>" class="btnNonSup">non</a>
+                            <input type="submit" value="oui" class="btnSup">
+                        </div>
+                        <input type="hidden" name="id" value="<?php echo $leUser['id'];?>">
+                    <form>
                 </div>
             </div>
             </form>
