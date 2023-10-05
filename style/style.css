@@ -12,20 +12,18 @@
     font-family:uchiyama;
 }
 
-/*GENERAL*/
+
+
+/*NAVBAR DE BASE*/
 .banniere{
     text-align: center;
     padding-top: 1vh;
     height: 12vh;
-    background-color: rgb(163, 136, 0);
-    border-bottom: 2px double rgba(206, 155, 1, 0.5);
 }
 
 .navBarOption{
-    color:rgb(46, 80, 119);
     text-decoration: none;
     font-family: uchiyama;
-    text-shadow:rgb(105,108,60) 2px 2px;
     width: 15%;
 }
 
@@ -52,53 +50,77 @@
     }
 }
 
-.navBarOption:hover{
-    color:rgba(69, 13, 52);
-    text-shadow:rgb(116,75,26) 2px 2px;
-}
-
 .retour{
     text-align: right;
 }
 
 .appLogo{
     font-family: dessert;
-    color:rgb(46, 80, 119);
-    text-shadow:rgb(105,108,60) 2px 2px;
-    width: 40%;
-    margin-left: 15%;
 }
 
 .appLogoAlt{
     font-family: dessert;
-    color:rgb(46, 80, 119);
-    text-shadow:rgb(105,108,60) 2px 2px;
     width: 25%;
     text-align: left;
 }
 
 .navBarTitre{
-    color: rgba(138, 5, 23);
     font-family: corn;
     font-size: 50px;
-    text-shadow:rgb(151,71,12) 2px 2px;
     width: 50%;
     margin-right: 10%;
     padding-top: 1vh;
 }
 
-.menu{
+/*PAGE D'INFO*/
+/*NAVBAR INFO*/
+.banniereInfo{
+    background-color: rgb(246,144,13);
+    border-bottom: 2px double rgba(249,159,8, 0.5);
+}
+
+.navBarOptionInfo{
+    color:rgb(46, 80, 119);
+    text-shadow:rgb(146,112,66) 2px 2px;
+}
+
+.navBarOptionInfo:hover{
+    color:rgba(69, 13, 52);
+    text-shadow:rgb(116,75,26) 2px 2px;
+}
+
+.appLogoInfo{
+    color:rgb(46, 80, 119);
+    text-shadow:rgb(146,112,66) 4px 2px;
+    width: 40%;
+    margin-left: 15%;
+}
+
+.appLogoAltInfo{
+    color:rgb(46, 80, 119);
+    text-shadow:rgb(146,112,66) 3px 2px;
+}
+
+.navBarTitreInfo{
+    color: rgba(138, 5, 23);
+    text-shadow:rgb(192,75,18) 2px 2px;
+}
+
+/*PAGE*/
+.menuInfo{
     text-align: center;
     background-image: url(../img/dataSmileyBG.png);
     height: 88vh;
     background-size:cover;
 }
 
-.titre{
+.titreInfo{
     color: rgba(46, 80, 119);
     font-family: corn;
     font-size: 50px;
     padding-top: 5vh;
+    text-shadow:rgb(23,40,60) -2px 2px;
+    
 }
 
 /*INDEX*/
@@ -144,7 +166,7 @@
 }
 
 .uneOptionIndex:hover{
-    color:rgba(10, 33, 15)
+    color:rgba(23,40,60)
 }
 .uneOptionVote{
     width: 30%;
@@ -158,9 +180,195 @@
 
 /*PROFIL*/
 
+@media(min-width: 0px) and (max-width: 767px){
+    .modUser{
+        justify-content: center;
+    }
+    .uneOptionProfil{
+        margin-top: 10px;
+    }
+}
+.modUser{
+    padding: 20px;
+}
 
+.uneOptionProfil{
+    background-color:rgb(69, 13, 52);
+    border-radius: 10px;
+    color:rgb(246,144,13);
+    text-decoration: none;
+    font-family: uchiyama;
+    font-size: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 30px;
+    
+}
 
-/*VOTE*/
+.uneOptionProfil:hover{
+    color:rgba(138, 5, 23)
+}
+
+.unEvent{
+    color: rgba(69, 13, 52);
+    font-family: uchiyama;
+    font-weight: bolder;
+    font-size:30px;
+}
+
+.unEvent:hover{
+    color: rgba(34, 59, 88);
+}
+
+/*PAGE DE MOD*/
+/*NAVBAR MOD*/
+.banniereMod{
+    background-color: rgb(5,4,172);
+    border-bottom: 2px double rgba(3,2,86, 0.5);
+}
+
+.navBarOptionMod{
+    color:rgb(255, 216, 0);
+    text-shadow:rgb(130,110,8) 1px 2px;
+}
+
+.navBarOptionMod:hover{
+    color:rgba(3,2,86);
+}
+
+.appLogoMod{
+    color:rgb(255,247,86);
+    text-shadow:rgb(90,60,196) 3px 2px;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.appLogoAltMod{
+    color:rgb(255,247,86);
+    text-shadow:rgb(90,60,196) 3px 2px;
+}
+
+.navBarTitreMod{
+    color: rgba(193,186,108);
+    text-shadow:rgb(68,65,151) 2px 2px;
+}
+
+/*PAGE*/
+.menuMod{
+    background-image: url(../img/eventSmileyBG.png);
+    height: 88vh;
+    background-size:cover;
+}
+
+.titreMod{
+    color: rgb(207, 75, 9);
+    font-family: corn;
+    font-size: 40px;
+    text-shadow:rgb(104,38,5) -2px 2px;
+    padding-top: 2vh;
+}
+
+.sousTitreMod{
+    color: rgb(207, 75, 9);
+    font-family: corn;
+    font-size: 35px;
+    text-shadow:rgb(104,38,5) -2px 2px;
+    padding-top: 1.5vh;
+}
+
+/*PAGE MOD EVENT*/
+
+.choixUserMod{
+    text-align: center;
+    background-color: rgb(255,247,86);
+    color: rgb(97, 152, 142);
+    font-weight: bolder;
+    font-size:20px;
+}
+
+.unUserMod{
+    color: rgba(10, 33, 15);
+    font-weight: bold;
+    text-align: center;
+}
+
+.btnAddMod{
+    background-color: rgb(97, 152, 142);
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 0.5vh;
+    font-weight: bold;
+}
+
+.boxUserAvecMod
+{
+    margin-top: 0.5vh;
+    border-bottom: dotted rgb(68,65,151);
+}
+
+.unUserAvecMod{
+    color:rgb(68,65,151);
+    text-shadow:rgb(17,16,38) 2px 1px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btnSupMod{
+    background-color: rgb(104, 8, 5);
+    border-radius: 100px;
+    font-size: large;
+    font-weight: bold;
+    font-family: dessert;
+}
+
+.catEventMod{
+    color: rgb(207, 75, 9);
+    margin-bottom: -0.25vh;
+    font-weight: bold;
+}
+
+.btnModEvent{
+    background-color: rgb(97, 152, 142);
+    font-weight: bold;
+}
+
+/*PAGE MOD USER*/
+.boxModUser{
+    margin-left: 40%;
+    width: 20%;
+}
+
+.catUserMod{
+    color: rgb(207, 75, 9);
+    margin-bottom: -0.25vh;
+    font-weight: bold;
+}
+
+.btnModUser{
+    background-color: rgb(97, 152, 142);
+    font-weight: bold;
+}
+
+.boxBtn{
+    display: flex;
+    justify-content: space-around;
+}
+
+.btnAnnulerMod{
+    color: black;
+    background-color: rgb(170, 11, 6);
+    font-weight: bold;
+    border: groove rgb(66, 66, 66) 0.5px;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.btnAnnulerMod:hover{
+    color: black;
+}
+
+/*PAGEVOTE*/
 .voteTitreBg{
     padding-top: 3vh;
     background-color: rgba(125, 78, 87);
@@ -246,6 +454,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
     padding-left: 150px;
     padding-right: 150px;
     border-radius: 40px;
+    font-weight: bold;
 }
 
 .titleCon{
@@ -261,9 +470,14 @@ input[type="range"]:focus::-webkit-slider-thumb {
     background-color: rgba(138,124,134, 0.671);
     padding: 10px;
     border-radius: 15px;
+
 }
 
 .linkCon:hover{
     color: rgb(51, 10, 39);
     background-color: rgb(138, 124, 134);
+}
+
+.linkConBox{
+    margin-top: 10px;
 }

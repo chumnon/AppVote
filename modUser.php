@@ -26,7 +26,7 @@ if (isset($_SESSION["connexion"])){
         <div class='container-fluid menuConnexion'>
             <div class='row blockCon'>
                 <h1 class='titleCon'>Vous n'êtes pas connecté</h1>
-                <div class='offset-3 col-6'>
+                <div class='offset-3 col-6 linkConBox'>
                 <a href="connexion.php" class='linkCon'>Page de connexion</a>
             </div>
         </div>
@@ -98,23 +98,28 @@ if (isset($_SESSION["connexion"])){
 
             if ($_SERVER['REQUEST_METHOD'] != "POST" || $erreur == true){
                 ?>
-                <div class="container-fluid" style="text-align:center">
-                    <h1>Modifier utilisateur</h1>
+                <div class="container-fluid banniere banniereMod">
+                    <div class="row navBar navBarMod">
+                            <h1 class="appLogo appLogoMod">M-NAV</h1>
+                    </div>
+                </div>
+
+                <div class="container-fluid menuMod" style="text-align:center">
+                    <h1 class="titreMod">Modifier utilisateur</h1>
                     <div class="row" style="text-align:left">
-                        <div class="offset-md-5 ">
+                        <div class="boxModUser">
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                                Utilisateur : </br> <input type="text" name="user" maxLength="40" value="<?php echo $leUser["user"];?>"><br>
+                                <p class="catUserMod">Utilisateur : </p> <input type="text" name="user" maxLength="40" value="<?php echo $leUser["user"];?>"><br>
                                 <p style="color:red;"><?php echo $userErreur; ?></p>
-                                Mots de passe : </br> <input type="password" name="mdp" maxLength="25"><br>
+                                <p class="catUserMod">Mots de passe : </p> <input type="password" name="mdp" maxLength="25"><br>
                                 <p style="color:red;"><?php echo $mdpErreur; ?></p>
-                                Confirmation : </br> <input type="password" name="cmdp" maxLength="25"><br>
+                                <p class="catUserMod">Confirmation : </p> <input type="password" name="cmdp" maxLength="25"><br>
                                 <p style="color:red;"><?php echo $cmdpErreur; ?></p>
-                                <input type="submit">
+                                <div class="boxBtn">
+                                    <input type="submit" value="modifer" class="btnModUser">
+                                    <a href="profil.php?id=<?php echo $leUser['id']?>" class="btnAnnulerMod">annuler</a> 
+                                </div>
                             </form>
-                        </div>
-                        <div class="offset-5 col-2">
-                            </br>
-                            <a href="profil.php?id=<?php echo $leUser['id']?>">annuler</a> 
                         </div>
                     </div>
                 </div>

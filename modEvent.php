@@ -27,7 +27,7 @@ if (isset($_SESSION["connexion"])){
         <div class='container-fluid menuConnexion'>
             <div class='row blockCon'>
                 <h1 class='titleCon'>Vous n'êtes pas connecté</h1>
-                <div class='offset-3 col-6'>
+                <div class='offset-3 col-6 linkConBox'>
                 <a href="connexion.php" class='linkCon'>Page de connexion</a>
             </div>
         </div>
@@ -132,32 +132,33 @@ if (isset($_SESSION["connexion"])){
             $mod = $conn->query($listeUserMod);
 
             ?>
-            <div class="container-fluid" style="text-align:center">
-            <div class="row retour">
-                    <div class="col-3 offset-md-9">
-                        <a href="index.php">Page principal</a>
-                    </div>
+
+            <div class="container-fluid banniere banniereMod">
+                <div class="row navBar navBarMod">
+                        <h1 class="appLogoAlt appLogoAltMod">M-NAV</h1>
+                        <h1 class="navBarTitre navBarTitreMod">Modification</h1>
+                        <a class="navBarOption navBarOptionMod" href="index.php">Page principal</a>
                 </div>
             </div>
-            <div class="container-fluid" style="text-align:center">
-            <h1>Modification évènement</h1>
+
+            <div class="container-fluid menuMod" style="text-align:center">
                 <div class="row">
-            <?php
+                <?php
                 ?>
                 <div class="offset-md-2 col-md-4">
                     <div class="row" style="text-align:left">
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                                    Nom : </br> <input type="text" name="nom" maxLength="64" value="<?php echo $nom;?>"><br>
+                                    <p class='catEventMod'>Nom :</p> <input type="text" name="nom" maxLength="64" value="<?php echo $nom;?>"><br>
                                     <p style="color:red;"><?php echo $nomErreur; ?></p>
-                                    Date : </br> <input type="date" name="date" value="<?php echo $date;?>"><br>
+                                    <p class='catEventMod'>Date :</p> <input type="date" name="date" value="<?php echo $date;?>"><br>
                                     <p style="color:red;"><?php echo $dateErreur; ?></p>
-                                    Lieu : </br> <input type="text" name="lieu" maxLength="128" value="<?php echo $lieu;?>"><br>
+                                    <p class='catEventMod'>Lieu :</p> <input type="text" name="lieu" maxLength="128" value="<?php echo $lieu;?>"><br>
                                     <p style="color:red;"><?php echo $lieuErreur; ?></p>
-                                    Departement : </br> <input type="text" name="departement" maxLength="64" value="<?php echo $departement;?>"><br>
+                                    <p class='catEventMod'>Departement : </p> <input type="text" name="departement" maxLength="64" value="<?php echo $departement;?>"><br>
                                     <p style="color:red;"><?php echo $departementErreur; ?></p>
-                                    Description : </br> <input type="text" name="description" maxLength="255" value="<?php echo $description;?>"><br>
+                                    <p class='catEventMod'>Description : </p> <input type="text" name="description" maxLength="255" value="<?php echo $description;?>"><br>
                                     <p style="color:red;"><?php echo $descriptionErreur; ?></p>
-                                    <input type="submit" name="modEvent">
+                                    <input type="submit" name="modEvent" class='btnModEvent' value='modifier'>
                                     <input type="hidden" name="id" value="<?php echo $id;?>">
                         </form>
                         <?php
@@ -176,14 +177,14 @@ if (isset($_SESSION["connexion"])){
                         ?>
                     </div>
                 </div>
-            <?php
+                <?php
         }
         ?>
             <div class="col-md-4">
-                <h2>Gestion des gestionnaires</h2>
-                    <div class="row" style="text-align:left">
-                        <h3>Ajouter les droits</h3>
-                        <select class="choixUser" id="listenonMod">
+                <h2 class='titreMod'>Gestion des gestionnaires</h2>
+                    <div class="row boxAddMod" style="text-align:left">
+                        <h3 class='sousTitreMod'>Ajouter les droits</h3>
+                        <select class="choixUserMod" id="listenonMod">
                         <?php
                         if ($nonMod->num_rows > 0){
                             while($row = $nonMod->fetch_assoc()){
@@ -192,12 +193,12 @@ if (isset($_SESSION["connexion"])){
                                     $option1 = $row['id'];
                                 }
                             ?>
-                                <option value="<?php echo $row['id']?>"><?php echo $row['user']?></option>
+                                <option value="<?php echo $row['id']?>" class='unUserMod'><?php echo $row['user']?></option>
                             <?php
                             }
                         } else {
                             ?>
-                            <option value="-1">Aucun user</option>
+                            <option value="-1">Aucun utilisateur</option>
                             <?php
                         }
                         ?>
@@ -206,7 +207,7 @@ if (isset($_SESSION["connexion"])){
                         if ($nonMod->num_rows > 0){
                             ?>
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                                <input type="submit" name="ajouter" value="ajouter">
+                                <input type="submit" name="ajouter" value="ajouter" class='btnAddMod'>
                                 <input type="hidden" name="id" value="<?php echo $id;?>">
                                 <input class="modChoisi" type="hidden" name="idMod" value="<?php echo $option1;?>">
                              </form>
@@ -216,15 +217,15 @@ if (isset($_SESSION["connexion"])){
                         ?>
                         </div>
                         <div class="row" style="text-align:left">
-                            <h3>Gestionnaire</h3>
+                            <h3 class='sousTitreMod'>Gestionnaire</h3>
                             <?php
                             if ($mod->num_rows > 0){
                                 while($row = $mod->fetch_assoc()){
                                 ?>
                                 <div class="container">
-                                    <div class="row" >
-                                        <div class="col-11">
-                                            <a><?php echo $row['user']?></a>
+                                    <div class="row boxUserAvecMod" >
+                                        <div class="col-11 ">
+                                            <a class='unUserAvecMod'><?php echo $row['user']?></a>
                                         </div>
                                         <div class="col-1">
                                             <?php
@@ -232,7 +233,7 @@ if (isset($_SESSION["connexion"])){
                                             } else {
                                             ?>
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                                                <input type="submit" name="sup" value="x">
+                                                <input type="submit" name="sup" value="x" class='btnSupMod'>
                                                 <input type="hidden" name="id" value="<?php echo $id;?>">
                                                 <input class="modChoisi" type="hidden" name="idMod" value="<?php echo $row['id']?>">
                                             </form>

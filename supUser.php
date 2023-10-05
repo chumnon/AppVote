@@ -26,7 +26,7 @@ if (isset($_SESSION["connexion"])){
         <div class='container-fluid menuConnexion'>
             <div class='row blockCon'>
                 <h1 class='titleCon'>Vous n'êtes pas connecté</h1>
-                <div class='offset-3 col-6'>
+                <div class='offset-3 col-6 linkConBox'>
                 <a href="connexion.php" class='linkCon'>Page de connexion</a>
             </div>
         </div>

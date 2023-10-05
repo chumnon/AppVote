@@ -30,7 +30,7 @@ if (isset($_SESSION["vote"] )){
         <div class='container-fluid menuConnexion'>
             <div class='row blockCon'>
                 <h1 class='titleCon'>Vous n'êtes pas connecté</h1>
-                <div class='offset-3 col-6'>
+                <div class='offset-3 col-6 linkConBox'>
                 <a href="connexion.php" class='linkCon'>Page de connexion</a>
             </div>
         </div>
@@ -57,20 +57,20 @@ if (isset($_SESSION["vote"] )){
             $leUser = $conn->query($monUser)->fetch_assoc();
             ?>
             
-            <div class="container-fluid banniere">
-                <div class="row navBar">
-                        <a class="navBarOption" href="profil.php?id=<?php echo $leUser['id']?>">Mon profil</a>
-                        <h1 class="appLogo">M-NAV</h1>
-                        <a class="navBarOption" href="connexion.php">Changer utilisateur</a>
-                        <a class="navBarOption" href="newUser.php">Nouvel utilisateur</a>
+            <div class="container-fluid banniere banniereInfo">
+                <div class="row navBar navBarInfo">
+                        <a class="navBarOption navBarOptionInfo" href="profil.php?id=<?php echo $leUser['id']?>">Mon profil</a>
+                        <h1 class="appLogo appLogoInfo">M-NAV</h1>
+                        <a class="navBarOption navBarOptionInfo" href="connexion.php">Changer utilisateur</a>
+                        <a class="navBarOption navBarOptionInfo" href="newUser.php">Nouvel utilisateur</a>
                 </div>
             </div>
 
-            <div class="container-fluid menu">
+            <div class="container-fluid menuInfo">
                 
                 <div class="row selectEvent">
                     <div class= "offset-md-2 col-md-8" >
-                        <h2 class="titre">Choix d'évènement</h2>
+                        <h2 class="titreInfo">Choix d'évènement</h2>
                         <select class="choixEvent" id="listeEvent">
                             <?php
                             if ($result->num_rows > 0){

@@ -26,7 +26,7 @@ if (isset($_SESSION["connexion"])){
             <div class='container-fluid menuConnexion'>
                 <div class='row blockCon'>
                     <h1 class='titleCon'>Vous n'êtes pas connecté</h1>
-                    <div class='offset-3 col-6'>
+                    <div class='offset-3 col-6 linkConBox'>
                     <a href="connexion.php" class='linkCon'>Page de connexion</a>
                 </div>
             </div>
@@ -54,36 +54,28 @@ if (isset($_SESSION["connexion"])){
 
             ?>
 
-            <div class="container-fluid banniere">
-                <div class="row navBar">
-                        <h1 class="appLogoAlt">M-NAV</h1>
-                        <h1 class="leUser navBarTitre"><?php echo $leUser['user']?></h1>
-                        <a class="navBarOption" href="index.php">Page principal</a>
+            <div class="container-fluid banniere banniereInfo">
+                <div class="row navBar navBarInfo">
+                        <h1 class="appLogoAlt appLogoAltInfo">M-NAV</h1>
+                        <h1 class="leUser navBarTitre navBarTitreInfo"><?php echo $leUser['user']?></h1>
+                        <a class="navBarOption navBarOptionInfo" href="index.php">Page principal</a>
                 </div>
             </div>
-            <div class="container-fluid menu">
-                <div class="row retour">
-                    <div class="col-3 offset-md-9">
-                    </div>
-                </div>
-                <div class="row leUser">
-                </div>
+
+            <div class="container-fluid menuInfo">
                 <div class="row modUser">
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <a href="modUser.php">modifier le compte</a>
-                    </div>
-                    <div class="col-6 offset-md-2 col-md-3">
-                        <a href="supUser.php?id=<?php echo $leUser['id']?>">supprimer le compte</a>
-                    </div>
+                        <a href="modUser.php" class="col-6 offset-md-2 col-md-4 uneOptionProfil">modifier le compte</a>
+                        <a href="supUser.php?id=<?php echo $leUser['id']?>" class="col-6 col-md-4  uneOptionProfil">supprimer le compte</a>
                 </div>
+
                 <div class="row selectEvent">
                     <div class= "offset-md-2 col-md-8" >
-                        <h2>Mes évènements</h2>
+                        <h2 class='titreInfo'>Mes évènements</h2>
                         <?php
                         if ($result->num_rows > 0){
                             while($row = $result->fetch_assoc()){
                                 ?>
-                                <a href="unEvent.php?id=<?php echo $row["id"]?>"><?php echo $row['nom']?></a>
+                                <a href="unEvent.php?id=<?php echo $row["id"]?>" class='unEvent'><?php echo $row['nom']?></a>
                                 </br>
                                 <?php
                             }
